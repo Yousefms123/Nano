@@ -48,7 +48,7 @@ const Navbar = () => {
 						))}
 						<li className="md:hidden mt-2">
 							<Link
-								to="/"
+								to="/register"
 								className="block py-2 px-3 text-white rounded-sm hover:underline"
 								onClick={() => setIsOpenMenu(false)}
 							>
