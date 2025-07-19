@@ -106,14 +106,14 @@ const DonationChance = () => {
 					return (
 						<div
 							key={index}
-							className="relative flex flex-col justify-between my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 font-Tajawal"
+							className="relative pb-4 flex flex-col justify-between my-6 bg-white shadow-sm border border-slate-200 rounded-xl w-96 font-Tajawal"
 						>
 							<div className="flex flex-col">
-								<div className="relative h-[40vh] mg:h-96 bg-clip-border z-10">
+								<div className="relative h-64 w-full overflow-hidden rounded-t-xl">
 									<img
 										src={item.image}
 										alt="card-image"
-										className="h-full w-full object-cover rounded-b-none z-20 rounded-s-md rounded-e-md aspect-video"
+										className="h-full w-full object-cover rounded-b-none z-20  aspect-video transition-transform duration-300 hover:scale-105"
 									/>
 									<div className="rounded-full bg-white absolute top-3 left-2.5 p-3 cursor-pointer">
 										<Share size={20} className="text-main-color text-xl" />
@@ -126,7 +126,7 @@ const DonationChance = () => {
 											{item.title}
 										</p>
 										<div className="flex items-center gap-1">
-											<p className="text-slate-800 text-base">
+											<p className="text-gray-600 text-base">
 												{item.rating}
 											</p>
 											<Star
@@ -135,13 +135,20 @@ const DonationChance = () => {
 											/>
 										</div>
 									</div>
-									<p className="text-slate-600 text-sm md:text-base leading-normal font-light text-start">
-										{item.description}
+									<p
+										className="text-gray-600  text-sm  text-start "
+										title={item.description || ""}
+									>
+										{item.description
+											? item.description.length > 120
+												? `${item.description.slice(0, 120)}...`
+												: item.description
+											: ""}
 									</p>
 								</div>
 							</div>
 
-							<div className="p-4">
+							<div className="px-4 py-2">
 								<div className="w-full">
 									<div className="flex relative justify-between text-sm text-gray-600 font-medium mb-1">
 										<span
@@ -171,7 +178,7 @@ const DonationChance = () => {
 								</div>
 							</div>
 
-							<div className="p-4 flex flex-col justify-between items-start">
+							<div className="px-4 flex flex-col justify-between items-start">
 								<Link
 									to={`/donate/item?title=${encodeURIComponent(
 										item.title
