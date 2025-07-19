@@ -64,7 +64,7 @@ const DonationCardItem = () => {
 
 	return (
 		<div className="px-4 mt-20 py-4 md:px-12 lg:px-12">
-			<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900">مشاريع نوعية</h1>
+			<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900 font-Tajawal">مشاريع نوعية</h1>
 			<div className="relative">
 				<button className="swiper-next absolute top-1/2 left-0 z-10 -translate-y-1/2 -translate-x-1/3 lg:-translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300">
 					<ChevronLeft className="text-main-color" />
