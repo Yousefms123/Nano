@@ -10,10 +10,10 @@ const DonationSection = () => {
 				<DynamicBreadcrumbs />
 			</div>
 			<div className="flex flex-col gap-x-11  md:flex-row">
-				<div className="hidden md:inline w-1/2">
+				<div className="hidden md:inline w-full lg:w-1/2">
 					<img src={donation} alt="" />
 				</div>
-				<div className="flex flex-col gap-y-5 text-start w-1/2">
+				<div className="flex flex-col gap-y-5 text-start w-full lg:w-1/2">
 					<h1 className="text-3xl font-bold">ساهم معنا في دعم حلقات تحفيظ القرآن</h1>
 					<p className="text-gray-700 text-base md:text-lg ">
 						تبرعك اليوم يُحدث فرقًا في تعليم كتاب الله، ويساهم في بناء جيل قرآني يحمل القيم
