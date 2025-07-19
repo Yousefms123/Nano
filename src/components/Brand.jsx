@@ -20,13 +20,13 @@ const Brand = () => {
 				<p className="text-white text-2xl lg:text-4xl">حيث نغرس نور القرأن في قلوب الأجيال</p>
 				<div className="flex flex-col md:flex-row lg:flex-row gap-4 items-center md:justify-center mt-3 w-full p-2">
 					<Button
-						to={"/donation"}
+						to={"/donate"}
 						className="text-base md:text-xl bg-button hover:bg-blue-900 rounded-full px-6 py-4 w-full"
 					>
 						تبرع من هنا
 					</Button>
 					<Button
-						to={"/donation"}
+						to={"/register"}
 						className="text-base md:text-xl border rounded-full px-6 py-4 w-full"
 					>
 						تسجيل طالب
