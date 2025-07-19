@@ -2,6 +2,7 @@ import React from "react";
 import { useSearchParams } from "react-router";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 import { Checkbox, Option, Select } from "@material-tailwind/react";
+import { Check } from "lucide-react";
 
 const PaymentSection = () => {
 	const [params] = useSearchParams();
@@ -78,8 +79,8 @@ const PaymentSection = () => {
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
 							/>
 
-							<h3 className="col-span-2 mt-6 text-lg font-semibold">خيارات الدفع</h3>
-							<div className="col-span-2 flex gap-6 mb-2">
+							<h3 className="lg:col-span-2 mt-6 text-lg font-semibold">خيارات الدفع</h3>
+							<div className="lg:col-span-2 flex gap-6 mb-2">
 								<label className="flex items-center gap-2">
 									<input type="radio" name="payment" defaultChecked />
 									<span>Credit Card</span>
@@ -100,7 +101,7 @@ const PaymentSection = () => {
 										e.target.value = e.target.value.slice(0, 16);
 									}
 								}}
-								className="col-span-2 w-full px-4 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
+								className="md:col-span-2 w-full px-4 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
 								id="card-number"
 							/>
 							<input
@@ -113,7 +114,7 @@ const PaymentSection = () => {
 										e.target.value = e.target.value.slice(0, 4);
 									}
 								}}
-								className="w-full px-4  border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
+								className="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
 								id="cvv"
 							/>
 							<div className="relative w-full">
@@ -121,7 +122,7 @@ const PaymentSection = () => {
 									type="date"
 									id="expiry-date"
 									className="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
-									placeholder=" " // نتركها فارغة لتفعيل ال label العائمة
+									placeholder=" "
 								/>
 								<label
 									htmlFor="expiry-date"
@@ -130,10 +131,15 @@ const PaymentSection = () => {
 									تاريخ الصلاحية
 								</label>
 							</div>
-							<div>
-								<Checkbox color="red" label="حفظ كبطاقة افتراضية" />
-							</div>
-							<div className="col-span-2">
+							<label class="flex items-center gap-2 cursor-pointer select-none">
+								<input type="checkbox" class="peer hidden" />
+								<div class="w-5 h-5 border-2 border-main-color rounded flex items-center justify-center peer-checked:bg-main-color peer-checked:border-main-color relative transition">
+									<Check className="text-white" />
+								</div>
+								<span class="text-gray-800">حفظ كبطاقة افتراضية</span>
+							</label>
+
+							<div className="lg:col-span-2">
 								<button
 									type="submit"
 									className="bg-main-color text-white w-full py-3 rounded-full mt-4 hover:bg-opacity-90 transition"
