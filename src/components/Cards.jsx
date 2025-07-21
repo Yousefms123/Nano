@@ -1,70 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
-import { ChevronLeft, ChevronRight, Share, Star } from "lucide-react";
-import Project1 from "../assets/project1.png";
-import Project2 from "../assets/project2.png";
-import Project3 from "../assets/project3.png";
+import { ChevronLeft, ChevronRight, Copy, Share, Star, X } from "lucide-react";
 
 // Swiper Carousel
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useData } from "../data/dataContext";
 
 const DonationCardItem = () => {
-	const cardData = [
-		{
-			image: Project1,
-			title: "كفالة ايجار مبنى",
-			description: "ساهم في تغطية تكاليف إيجار المبنى الذي يحتضن الأنشطة القرآنية",
-			link: "/donation",
-			rate: "4.9",
-			currentAmount: 200,
-			targetAmount: 4500,
-		},
-		{
-			image: Project2,
-			title: "تعليم القرآن للأطفال",
-			description:
-				"شارك في نشر الخير من خلال دعم حلقات تحفيظ القرآن للأطفال، وتوفير بيئة تربوية تُحببهم في كتاب الله وتغرس فيهم القيم الإسلامية",
-			link: "/donation",
-			rate: "4.8",
-			currentAmount: 1005,
-			targetAmount: 4500,
-		},
-		{
-			image: Project3,
-			title: "كفالة الطالب",
-			description: "ساهم في تعليم طالبٍ القرآن الكريم وتوفير بيئة آمنة له",
-			link: "/donation",
-			rate: "4.2",
-			currentAmount: 2800,
-			targetAmount: 4500,
-		},
-		{
-			image: Project2,
-			title: "تعليم القرآن للأطفال",
-			description:
-				"شارك في نشر الخير من خلال دعم حلقات تحفيظ القرآن للأطفال، وتوفير بيئة تربوية تُحببهم في كتاب الله وتغرس فيهم القيم الإسلامية",
-			link: "/donation",
-			rate: "4.8",
-			currentAmount: 1005,
-			targetAmount: 4500,
-		},
-		{
-			image: Project1,
-			title: "كفالة ايجار مبنى",
-			description: "ساهم في تغطية تكاليف إيجار المبنى الذي يحتضن الأنشطة القرآنية",
-			link: "/donation",
-			rate: "4.9",
-			currentAmount: 200,
-			targetAmount: 4500,
-		},
-	];
+	const [openIndex, setOpenIndex] = useState(null);
+	const { cardData } = useData();
+	const handleShareClick = (index) => {
+		setOpenIndex(openIndex === index ? null : index);
+	};
+
+	const handleCopyLink = (item) => {
+		const baseUrl = `${window.location.origin}/donate/item`;
+		const params = new URLSearchParams({
+			title: item.title,
+		});
+
+		const fullLink = `${baseUrl}?${params.toString()}`;
+		navigator.clipboard
+			.writeText(fullLink)
+			.then(() => alert("✅ تم نسخ رابط التبرع لهذا المشروع"))
+			.catch(() => alert("❌ حدث خطأ أثناء نسخ الرابط"));
+	};
 
 	return (
 		<div className="px-4 mt-20 py-4 md:px-12 lg:px-12">
-			<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900 font-Tajawal">مشاريع نوعية</h1>
+			<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900 font-Tajawal">
+				مشاريع نوعية
+			</h1>
 			<div className="relative">
 				<button className="swiper-next absolute top-1/2 left-0 z-10 -translate-y-1/2 -translate-x-1/3 lg:-translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300">
 					<ChevronLeft className="text-main-color" />
@@ -104,8 +73,41 @@ const DonationCardItem = () => {
 											alt={item.title}
 											className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 										/>
-										<div className="absolute top-3 left-3 bg-white p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100 transition">
-											<Share size={20} className="text-main-color" />
+										<div className="absolute top-4 left-4 ">
+											{/* زر المشاركة */}
+											<button
+												onClick={() => handleShareClick(index)}
+												className="bg-white p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100 transition"
+											>
+												{openIndex === index ? (
+													<X
+														size={20}
+														className="text-main-color "
+													/>
+												) : (
+													<Share
+														size={20}
+														className="text-main-color"
+													/>
+												)}
+											</button>
+
+											{openIndex === index && (
+												<div className="mt-3 absolute w-[130px] left-4 border border-gray-300 p-2 rounded bg-gray-100 shadow-md transition-all">
+													<button
+														onClick={() =>
+															handleCopyLink(item, index)
+														}
+														className="text-sm flex gap-x-3 justify-center items-center bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+													>
+														نسخ الرابط{" "}
+														<Copy
+															size={10}
+															className="text-white"
+														/>
+													</button>
+												</div>
+											)}
 										</div>
 									</div>
 
@@ -172,11 +174,7 @@ const DonationCardItem = () => {
 										<Link
 											to={`/donate/item?title=${encodeURIComponent(
 												item.title
-											)}&id=${index}&amount=${item.currentAmount}&target=${
-												item.targetAmount
-											}&rate=${item.rate}&image=${item.image}&desc=${
-												item.description
-											}`}
+											)}`}
 											className="w-full"
 										>
 											<button

@@ -19,7 +19,7 @@ const DonationSection = () => {
 						تبرعك اليوم يُحدث فرقًا في تعليم كتاب الله، ويساهم في بناء جيل قرآني يحمل القيم
 						والإيمان. نحن نعمل لتوفير بيئة تعليمية راقية ومجانية لأبناء المجتمع، بدعمكم نستمر{" "}
 					</p>
-					<form action="" className="flex flex-col gap-y-7">
+					<form className="flex flex-col gap-y-7">
 						<div>
 							<label
 								className="block mb-2 text-base md:text-2xl font-medium"

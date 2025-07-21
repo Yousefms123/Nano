@@ -1,10 +1,12 @@
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import ImgCarousel from "../assets/imgCarousel.png";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 export function CarouselWithContent() {
 	const carouselData = [
 		{
@@ -42,18 +44,41 @@ export function CarouselWithContent() {
 		},
 		// Add more carousel items here if needed
 	];
-
+	const prevRef = useRef(null);
+	const nextRef = useRef(null);
 	return (
-		<div className=" p-4 md:p-11">
+		<div className="relative p-4 md:p-11">
+			<button
+				ref={nextRef}
+				className=" cursor-pointer absolute top-1/2 left-8 lg:left-10 z-10 -translate-y-1/2 -translate-x-1/3 lg:-translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+			>
+				<ChevronLeft className="text-main-color" />
+			</button>
+
+			{/* الزر على اليمين: العودة للخلف (السابق) */}
+			<button
+				ref={prevRef}
+				className="cursor-pointer absolute top-1/2 right-8 lg:right-10 z-10 -translate-y-1/2 translate-x-1/3 lg:translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+			>
+				<ChevronRight className="text-main-color" />
+			</button>
 			<Swiper
-				slidesPerView={"auto"}
-				centeredSlides={true}
-				spaceBetween={30}
-				pagination={{
-					clickable: true,
+				modules={[Navigation]}
+				navigation={{
+					prevEl: prevRef.current,
+					nextEl: nextRef.current,
 				}}
-				modules={[Pagination]}
-				className="mySwiper w-full h-[50vh] md:h-[80vh] rounded-lg"
+				onBeforeInit={(swiper) => {
+					swiper.params.navigation.prevEl = prevRef.current;
+					swiper.params.navigation.nextEl = nextRef.current;
+				}}
+				spaceBetween={24}
+				breakpoints={{
+					320: { slidesPerView: 1 },
+					768: { slidesPerView: 1 },
+					1024: { slidesPerView: 1 },
+				}}
+				className="pb-8"
 			>
 				{carouselData.map((item) => (
 					<SwiperSlide key={item.id} className="relative h-[100vh]">
@@ -62,7 +87,7 @@ export function CarouselWithContent() {
 							alt={item.title}
 							className="absolute inset-0 w-full h-full object-cover"
 						/>
-						<div className="relative z-10 flex flex-col items-start md:items-center justify-center gap-3 md:gap-7 text-center p-4 h-full bg-main-color/15 font-Tajawal">
+						<div className="relative z-10 flex flex-col items-center md:items-center justify-center gap-3 md:gap-7 text-center p-4 h-full bg-main-color/15 font-Tajawal">
 							<h2 className="text-2xl lg:text-5xl font-bold md:mb-4 text-white">
 								{item.title}
 							</h2>
