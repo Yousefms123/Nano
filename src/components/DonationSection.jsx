@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router";
-import { Star, CreditCard, Heart, HandCoins } from "lucide-react";
+import { useSearchParams, useNavigate } from "react-router";
+import { Star, HandCoins } from "lucide-react";
 import MainButton from "../components/Button";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
-
+import { useData } from "../data/dataContext"; // ✅
 const DonationSection = () => {
 	const navigate = useNavigate();
-	const [searchParams] = useSearchParams();
 	const [customAmount, setCustomAmount] = useState("");
+	const [searchParams] = useSearchParams();
+	const { cardData, donationData } = useData(); // ✅
 
-	// استخراج البيانات من URL parameters
-	const projectTitle = searchParams.get("title") || "مشروع خيري";
-	const descTitle = searchParams.get("desc") || "";
-	// const projectId = searchParams.get("id") || "1";
-	const currentAmount = searchParams.get("amount") || "0";
-	const targetAmount = searchParams.get("target") || "1000";
-	const rating = searchParams.get("rate") || "4.5";
-	const img = searchParams.get("image") || null;
+	const projectTitle = searchParams.get("title") || "";
+
+	const projectFromDonations = donationData.find((item) => item.title === projectTitle);
+
+	const project = projectFromDonations || cardData.find((item) => item.title === projectTitle);
+
+	if (!project) {
+		return <div className="text-center mt-20">❌ لم يتم العثور على هذا المشروع</div>;
+	}
+
+	const { title, description, currentAmount, targetAmount, rating, image } = project;
+
 	const handleDonate = (e) => {
 		e.preventDefault();
 
@@ -25,14 +30,10 @@ const DonationSection = () => {
 			return;
 		}
 
-		navigate(
-			`/payment?title=${encodeURIComponent(projectTitle)}&desc=${encodeURIComponent(
-				descTitle
-			)}&amount=${customAmount}&img=${encodeURIComponent(img)}`
-		);
+		navigate(`/payment?title=${encodeURIComponent(title)}&amount=${customAmount}`);
 	};
-	const percentage = Math.min(100, (parseInt(currentAmount) / parseInt(targetAmount)) * 100).toFixed();
 
+	const percentage = Math.min(100, (parseInt(currentAmount) / parseInt(targetAmount)) * 100).toFixed();
 	return (
 		<div className="mt-20 py-4 font-Tajawal">
 			<div className="mx-auto px-4 font-Tajawal">
@@ -42,12 +43,14 @@ const DonationSection = () => {
 
 				<div className="grid md:grid-cols-2 gap-8 space-y-8 mt-16 md:px-20 lg:px-28 ">
 					<div className="w-full">
-						<img className="rounded-lg w-full" src={img} alt="" />
+						<img className="rounded-lg w-full" src={image} alt="" />
 					</div>
 					<div className="flex flex-col items-start text-start gap-y-1 lg:gap-y-6">
 						<div>
 							<h1 className="text-3xl font-bold text-gray-900 mb-4">{projectTitle}</h1>
-							<p className="text-sm md:text-base lg:text-lg  text-gray-700">{descTitle}</p>
+							<p className="text-sm md:text-base lg:text-lg  text-gray-700">
+								{description}
+							</p>
 						</div>
 						<div className="flex flex-wrap items-center gap-x-5 gap-y-3">
 							<div className="flex items-center gap-x-3">
@@ -115,8 +118,6 @@ const DonationSection = () => {
 							</form>
 						</div>
 					</div>
-
-					{/* نموذج التبرع */}
 				</div>
 			</div>
 		</div>

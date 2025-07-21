@@ -13,11 +13,13 @@ const Brand = () => {
 				<div className="flex gap-4">
 					<img src={Ramadan} alt="" className="hidden" />
 					<h1 className="text-4xl md:text-6xl lg:text7xl font-bold font-Tajawal">
-						مركز السيت القرأني
+						مركز السيب القرآني
 					</h1>
 					<img src={Ramadan} alt="" className="hidden transform rotate-180" />
 				</div>
-				<p className="text-white text-2xl lg:text-4xl">حيث نغرس نور القرأن في قلوب الأجيال</p>
+				<p className="text-white text-2xl lg:text-4xl font-Tajawal">
+					حيث نغرس نور القرأن في قلوب الأجيال
+				</p>
 				<div className="flex flex-col md:flex-row lg:flex-row gap-4 items-center md:justify-center mt-3 w-full p-2 font-Tajawal">
 					<Button
 						to={"/donate"}

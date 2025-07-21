@@ -11,6 +11,7 @@ import { PiPhoneCall } from "react-icons/pi";
 import { MapPin } from "lucide-react";
 
 const Footer = () => {
+	const currentYear = new Date().getFullYear();
 	const social = [
 		{ icon: FaWhatsapp, link: "/" },
 		{ icon: FiFacebook, link: "/" },
@@ -127,10 +128,10 @@ const Footer = () => {
 						referrerPolicy="no-referrer-when-downgrade"
 					></iframe>
 				</div>
-				<div className="flex items-center justify-center gap-x-6 py-4 text-gray-600">
-					<span>جميع الحقوق محفوظة</span>
+				<div className="flex items-center justify-center gap-x-2 lg:gap-x-6 py-4 text-gray-600">
+					<span className="text-[10px]"> جميع الحقوق محفوظة لسنة {currentYear} ©</span>
 					<span>|</span>
-					<span>مركز السيت القرآني لتحفيظ القرآن</span>
+					<span className="text-[10px]">مركز السيب القرآني لتحفيظ القرآن</span>
 				</div>
 			</div>
 		</footer>

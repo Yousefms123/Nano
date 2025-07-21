@@ -1,206 +1,209 @@
-// src/components/DonationSection.jsx
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Star, Share2, Share } from "lucide-react";
-import "swiper/css";
-import dontation1 from "../assets/dontation1.png";
-import dontation2 from "../assets/dontation2.png";
-import dontation3 from "../assets/dontation3.png";
-import ImgCarousel from "../assets/imgCarousel.png";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router";
+import { ChevronLeft, ChevronRight, Copy, Share, Star, X } from "lucide-react";
 
-const donationData = [
-	{
-		id: 1,
-		category: "كفالات",
-		title: "كفالة حلقة تعليمية",
-		description: "كن سببًا في استمرار حلقة كاملة تشمل المكان والمعلم والاجتماعات",
-		image: dontation1,
-		link: "/donation",
-		currentAmount: 2490,
-		targetAmount: 4500,
-		rating: 4.8,
-	},
-	{
-		id: 2,
-		category: "كفالات",
-		title: "كفالة تكريم الطلاب",
-		description: "شارِك في إدخال السرور على قلوب الطلاب من خلال دعم جوائز التكريم والتشجيع",
-		image: dontation2,
-		link: "/donation",
-		currentAmount: 2490,
-		targetAmount: 4500,
-		rating: 4.8,
-	},
-	{
-		id: 3,
-		category: "كفالات",
-		title: "كفالة عامة",
-		description: "دعم مفتوح يستخدم حسب الحاجة في التعليم أو الإدارة والفعاليات",
-		image: dontation3,
-		link: "/donation",
-		currentAmount: 2490,
-		targetAmount: 4500,
-		rating: 4.8,
-	},
-	{
-		id: 4,
-		category: "المشاريع",
-		title: "مشروع توزيع المصاحف",
-		description: "ساهم في نشر كتاب الله عبر دعم طباعة وتوزيع المصاحف",
-		image: ImgCarousel,
-		link: "/donation",
-		currentAmount: 800,
-		targetAmount: 2500,
-		rating: 4.7,
-	},
-	{
-		id: 5,
-		category: "الزكاة",
-		title: "زكاة المال",
-		description: "ادفع زكاة مالك في مصارفها الشرعية لتغطي احتياجات الأسر",
-		image: ImgCarousel,
-		link: "/donation",
-		currentAmount: 2000,
-		targetAmount: 4000,
-		rating: 4.9,
-	},
-];
+// Swiper Carousel
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { useData } from "../data/dataContext";
 
-const categories = ["كفالات", "المشاريع", "الزكاة"];
+const DonationCardItem = () => {
+	const [openIndex, setOpenIndex] = useState(null);
+	const { donationData } = useData();
+	const prevRef = useRef(null);
+	const nextRef = useRef(null);
+	const handleShareClick = (index) => {
+		setOpenIndex(openIndex === index ? null : index);
+	};
 
-const DonationChance = () => {
-	const [selectedCategory, setSelectedCategory] = useState("كفالات");
+	const handleCopyLink = (item) => {
+		const baseUrl = `${window.location.origin}/donate/item`;
+		const params = new URLSearchParams({
+			title: item.title,
+		});
 
-	const filteredDonations = donationData.filter((donation) => donation.category === selectedCategory);
+		const fullLink = `${baseUrl}?${params.toString()}`;
+		navigator.clipboard
+			.writeText(fullLink)
+			.then(() => alert("✅ تم نسخ رابط التبرع لهذا المشروع"))
+			.catch(() => alert("❌ حدث خطأ أثناء نسخ الرابط"));
+	};
 
 	return (
-		<div className="py-12 px-4">
-			<h2 className="text-2xl md:text-3xl font-bold text-center mb-8">فرص التبرع</h2>
+		<div className="px-4 mt-20 py-4 md:px-12 lg:px-12">
+			<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900 font-Tajawal">
+				مشاريع نوعية
+			</h1>
+			<div className="relative">
+				<button
+					ref={nextRef}
+					className=" absolute top-1/2 left-0 z-10 -translate-y-1/2 -translate-x-1/3 lg:-translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+				>
+					<ChevronLeft className="text-main-color" />
+				</button>
 
-			{/* الفلاتر */}
-			<div className="flex justify-center gap-4 mb-6 flex-wrap">
-				{categories.map((cat) => (
-					<button
-						key={cat}
-						className={`px-4 py-2 rounded-lg border ${
-							selectedCategory === cat
-								? "bg-main-color/20 text-main-color border-main-color"
-								: "bg-transparent border-gray-500 text-gray-700"
-						}`}
-						onClick={() => setSelectedCategory(cat)}
-					>
-						{cat}
-					</button>
-				))}
-			</div>
+				{/* الزر على اليمين: العودة للخلف (السابق) */}
+				<button
+					ref={prevRef}
+					className="absolute top-1/2 right-0 z-10 -translate-y-1/2 translate-x-1/3 lg:translate-x-1/3 bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+				>
+					<ChevronRight className="text-main-color" />
+				</button>
 
-			{/* عرض الكروت بشكل Grid بدلاً من Swiper */}
-			<div className="flex flex-wrap gap-x-5 mx-auto justify-center items-center p-3">
-				{filteredDonations.map((item, index) => {
-					const percentage = Math.min(
-						100,
-						(item.currentAmount / item.targetAmount) * 100
-					).toFixed();
+				<Swiper
+					modules={[Navigation]}
+					navigation={{
+						prevEl: prevRef.current,
+						nextEl: nextRef.current,
+					}}
+					onBeforeInit={(swiper) => {
+						swiper.params.navigation.prevEl = prevRef.current;
+						swiper.params.navigation.nextEl = nextRef.current;
+					}}
+					spaceBetween={24}
+					breakpoints={{
+						320: { slidesPerView: 1, spaceBetween: 16 },
+						768: { slidesPerView: 2, spaceBetween: 24 },
+						1024: { slidesPerView: 3, spaceBetween: 24 },
+					}}
+					className="pb-8"
+				>
+					{donationData.map((item, index) => {
+						const percentage = Math.min(
+							100,
+							(item.currentAmount / item.targetAmount) * 100
+						).toFixed(0);
 
-					return (
-						<div
-							key={index}
-							className="relative pb-4 flex flex-col justify-between my-6 bg-white shadow-sm border border-slate-200 rounded-xl w-96 font-Tajawal"
-						>
-							<div className="flex flex-col">
-								<div className="relative h-64 w-full overflow-hidden rounded-t-xl">
-									<img
-										src={item.image}
-										alt="card-image"
-										className="h-full w-full object-cover rounded-b-none z-20  aspect-video transition-transform duration-300 hover:scale-105"
-									/>
-									<div className="rounded-full bg-white absolute top-3 left-2.5 p-3 cursor-pointer">
-										<Share size={20} className="text-main-color text-xl" />
-									</div>
-								</div>
+						return (
+							<SwiperSlide key={index} className="h-full">
+								<div className=" h-full bg-white rounded-xl  transition-shadow duration-300 border border-gray-200 font-Tajawal">
+									<div className="relative h-64 w-full overflow-hidden rounded-t-xl">
+										<img
+											src={item.image}
+											alt={item.title}
+											className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+										/>
+										<div className="absolute top-4 left-4 ">
+											{/* زر المشاركة */}
+											<button
+												onClick={() => handleShareClick(index)}
+												className="bg-white p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100 transition"
+											>
+												{openIndex === index ? (
+													<X
+														size={20}
+														className="text-main-color "
+													/>
+												) : (
+													<Share
+														size={20}
+														className="text-main-color"
+													/>
+												)}
+											</button>
 
-								<div className="p-4">
-									<div className="mb-2 flex items-center justify-between">
-										<p className="text-slate-800 text-xl font-semibold">
-											{item.title}
-										</p>
-										<div className="flex items-center gap-1">
-											<p className="text-gray-600 text-base">
-												{item.rating}
-											</p>
-											<Star
-												size={20}
-												className="fill-amber-500 stroke-none"
-											/>
+											{openIndex === index && (
+												<div className="mt-3 absolute w-[130px] left-4 border border-gray-300 p-2 rounded bg-gray-100 shadow-md transition-all">
+													<button
+														onClick={() =>
+															handleCopyLink(item, index)
+														}
+														className="text-sm flex gap-x-3 justify-center items-center bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+													>
+														نسخ الرابط{" "}
+														<Copy
+															size={10}
+															className="text-white"
+														/>
+													</button>
+												</div>
+											)}
 										</div>
 									</div>
-									<p
-										className="text-gray-600  text-sm  text-start "
-										title={item.description || ""}
-									>
-										{item.description
-											? item.description.length > 120
-												? `${item.description.slice(0, 120)}...`
-												: item.description
-											: ""}
-									</p>
-								</div>
-							</div>
 
-							<div className="px-4 py-2">
-								<div className="w-full">
-									<div className="flex relative justify-between text-sm text-gray-600 font-medium mb-1">
-										<span
-											className="absolute bottom-1.5 text-[10px] md:text-base"
-											style={{
-												right: `${percentage}%`,
-												transform: "translateX(50%)",
-												display:
-													item.currentAmount === item.targetAmount
-														? "none"
-														: "inline",
-											}}
+									{/* هذا القسم سيمتد لملء الفراغ ويدفع الزر لأسفل */}
+									<div className="p-5 flex flex-col justify-between h-64">
+										<div className="mb-3 flex items-center justify-between">
+											<h3 className="text-xl font-bold text-gray-800">
+												{item.title}
+											</h3>
+											<div className="flex items-center gap-1 px-2 py-1 rounded-full">
+												<p className="text-base text-gray-600 ">
+													{item.rate}
+												</p>
+												<Star
+													size={18}
+													className="fill-amber-500 stroke-amber-500"
+												/>
+											</div>
+										</div>
+
+										<p
+											className="text-gray-600 leading-relaxed text-sm mb-4 text-start flex-grow"
+											title={item.description || ""}
 										>
-											{item.currentAmount}$
-										</span>
-										<span className="absolute bottom-1.5 left-0 text-[10px] md:text-base">
-											{item.targetAmount}$
-										</span>
-									</div>
+											{item.description
+												? item.description.length > 120
+													? `${item.description.slice(0, 80)}...`
+													: item.description
+												: ""}
+										</p>
 
-									<div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-										<div
-											className="h-full bg-[#822F14] rounded-full transition-all duration-300"
-											style={{ width: `${percentage}%` }}
-										></div>
+										{/* شريط التقدم */}
+										<div className="pt-4">
+											<div className="w-full">
+												<div className="flex relative justify-between text-sm text-gray-600 font-medium mb-1">
+													<span
+														className="absolute bottom-1.5"
+														style={{
+															right: `${percentage}%`,
+															transform: "translateX(50%)",
+															display:
+																item.currentAmount ===
+																item.targetAmount
+																	? "none"
+																	: "inline",
+														}}
+													>
+														{item.currentAmount}$
+													</span>
+													<span className="absolute bottom-1.5 left-0">
+														{item.targetAmount}$
+													</span>
+												</div>
+												<div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+													<div
+														className="h-full bg-[#822F14] rounded-full transition-all duration-300"
+														style={{ width: `${percentage}%` }}
+													></div>
+												</div>
+											</div>
+										</div>
+
+										<Link
+											to={`/donate/item?title=${encodeURIComponent(
+												item.title
+											)}`}
+											className="w-full"
+										>
+											<button
+												className="rounded-md w-full mt-6 bg-transparent text-main-color py-2 px-4 border border-main-color cursor-pointer text-center text-sm transition-all shadow-md hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+												type="button"
+											>
+												تبرع هنا
+											</button>
+										</Link>
 									</div>
 								</div>
-							</div>
-
-							<div className="px-4 flex flex-col justify-between items-start">
-								<Link
-									to={`/donate/item?title=${encodeURIComponent(
-										item.title
-									)}&id=${index}&amount=${item.currentAmount}&target=${
-										item.targetAmount
-									}&rate=${item.rate}&image=${item.image}&desc=${item.description}`}
-									className="w-full"
-								>
-									<button
-										className="rounded-md w-full mt-6 bg-transparent text-main-color py-2 px-4 border border-main-color cursor-pointer text-center text-sm transition-all shadow-md hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-										type="button"
-									>
-										تبرع هنا
-									</button>
-								</Link>
-							</div>
-						</div>
-					);
-				})}
+							</SwiperSlide>
+						);
+					})}
+				</Swiper>
 			</div>
 		</div>
 	);
 };
 
-export default DonationChance;
+export default DonationCardItem;

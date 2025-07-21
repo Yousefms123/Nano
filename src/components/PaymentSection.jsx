@@ -3,20 +3,25 @@ import { useSearchParams } from "react-router";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 import { Checkbox, Option, Select } from "@material-tailwind/react";
 import { Check } from "lucide-react";
+import { useData } from "../data/dataContext";
 
 const PaymentSection = () => {
 	const [params] = useSearchParams();
+	const { cardData, donationData } = useData();
 
-	const title = params.get("title") || "مشروع خيري";
-	const desc = params.get("desc") || "تفاصيل المشروع";
-	const img = params.get("img") || "/default.png"; // إذا لم يوجد صورة
+	const title = params.get("title") || "";
 	const amount = params.get("amount") || "10";
+
+	const project =
+		cardData.find((item) => item.title === title) || donationData.find((item) => item.title === title);
+
+	if (!project) return <div>المشروع غير موجود</div>;
+
+	const desc = project.description;
+	const img = project.image;
 
 	return (
 		<div className="mt-20 px-6 lg:px-28 flex flex-col lg:flex-row gap-10 font-Tajawal">
-			{/* ملخص العملية */}
-
-			{/* نموذج الدفع */}
 			<div className="w-full lg:w-2/3 text-start">
 				<h2 className="text-xl font-bold mb-2">معلومات جهة الاتصال</h2>
 				<p className="mb-6">سنستخدم هذا البريد الإلكتروني لنرسل إليك تفاصيل وتحديثات بشأن طلبك.</p>
