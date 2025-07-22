@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
 import Logo from "../assets/FooterLogo.svg";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";

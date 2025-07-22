@@ -1,5 +1,5 @@
 import React from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 import { Checkbox, Option, Select } from "@material-tailwind/react";
 import { Check } from "lucide-react";

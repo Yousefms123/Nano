@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/Logo.svg";
 import { Menu, X } from "lucide-react";
-import { useLocation } from "react-router";
+
 import MainButton from "./Button";
 
 const Navbar = () => {

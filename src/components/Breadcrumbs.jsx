@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router"; // استخدام Link للتنقل
+import { Link } from "react-router-dom"; // استخدام Link للتنقل
 import { ChevronLeft, ChevronRight } from "lucide-react"; // أيقونة للفصل
 
 const Breadcrumbs = ({ items }) => {

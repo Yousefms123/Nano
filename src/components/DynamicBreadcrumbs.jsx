@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useSearchParams } from "react-router";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Breadcrumbs from "./Breadcrumbs";
 
 const breadcrumbNameMap = {

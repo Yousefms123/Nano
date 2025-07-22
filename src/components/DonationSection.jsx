@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Star, HandCoins } from "lucide-react";
 import MainButton from "../components/Button";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";

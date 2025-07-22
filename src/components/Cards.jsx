@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Copy, Share, Star, X } from "lucide-react";
 
 // Swiper Carousel
