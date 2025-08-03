@@ -14,12 +14,13 @@ const RegisterSection = () => {
 	const [days, setDays] = useState("");
 	const [preferTime, setPreferTime] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const alertRef = useRef();
 	// const formRef = useRef();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setLoading(true);
 		const url = "https://api.sheetbest.com/sheets/f4ffb9c1-c28e-4184-9139-6f1dead99369";
 		const studentData = {
 			"الاسم الكامل": name,
@@ -37,6 +38,7 @@ const RegisterSection = () => {
 			setPhoneNumber("");
 			setDays("");
 			setPreferTime("");
+			setLoading(false);
 			setShowAlert(true);
 			setTimeout(() => {
 				setShowAlert(false);
@@ -51,7 +53,7 @@ const RegisterSection = () => {
 					ref={alertRef}
 					className="fixed text-sm font-bold flex items-center gap-x-1 lg:gap-x-4 top-32 lg:right-32 z-50 border border-green-600 bg-green-500/30 text-green-600 p-2  lg:px-6 lg:py-3 rounded-lg shadow-lg shadow-green-500/30 transition-all duration-500 animate-slide-in"
 				>
-					<CheckCircle size={15} className="font-bold"/>
+					<CheckCircle size={15} className="font-bold" />
 					شكرا لك سيتم التواصل معك بأقرب وقت
 				</div>
 			)}
@@ -127,10 +129,22 @@ const RegisterSection = () => {
 						</Select>
 
 						<MainButton
-							className="lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl"
+							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl ${
+								loading
+									? "bg-main-color/65 cursor-wait "
+									: "bg-main-color text-white"
+							}`}
 							type="submit"
+							disabled={loading}
 						>
-							ارسال الطلب
+							{loading ? (
+								<>
+									<span>الرجاء الانتظار</span>
+									<span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mx-5"></span>
+								</>
+							) : (
+								"إرسال الطلب"
+							)}
 						</MainButton>
 					</form>
 				</div>

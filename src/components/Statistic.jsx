@@ -41,7 +41,7 @@ const stats = [
 const Statistic = () => {
 	const { ref, inView } = useInView({
 		triggerOnce: true,
-		threshold: 0.9,
+		threshold: 0.2,
 	});
 	return (
 		<div ref={ref} className="py-12 px-4 bg-white font-Tajawal">
@@ -61,7 +61,7 @@ const Statistic = () => {
 							{inView ? (
 								<CountUp
 									end={stat.number}
-									duration={2}
+									duration={3}
 									suffix={stat.suffix}
 									start={0}
 								/>

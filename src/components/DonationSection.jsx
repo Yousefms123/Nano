@@ -102,7 +102,7 @@ const DonationSection = () => {
 								</label>
 								<input
 									type="number"
-									placeholder="ادخل المبلغ (بالريال العماني )"
+									placeholder="أدخل المبلغ"
 									value={customAmount}
 									onChange={(e) => setCustomAmount(e.target.value)}
 									required
@@ -111,9 +111,9 @@ const DonationSection = () => {
 
 								<MainButton
 									type="submit"
-									className="w-full bg-button rounded-full text-white py-3 text-sm lg:text-lg font-medium"
+									className="w-full bg-button rounded-full text-white py-3 text-sm lg:text-lg font-medium font-Tajawal"
 								>
-									{customAmount ? `تبرع بـ ${customAmount} ريال` : "تبرع الآن"}
+									{customAmount ? `تبرع بـ ${customAmount} دولار` : "تبرع الآن"}
 								</MainButton>
 							</form>
 						</div>

@@ -67,7 +67,7 @@ const donationData = [
 		image: dontation1,
 		currentAmount: 2490,
 		targetAmount: 4500,
-		rating: 4.8,
+		rate: 5,
 	},
 	{
 		category: "كفالات",
@@ -76,7 +76,7 @@ const donationData = [
 		image: dontation2,
 		currentAmount: 2490,
 		targetAmount: 4500,
-		rating: 4.8,
+		rate: 4.2,
 	},
 	{
 		category: "كفالات",
@@ -85,7 +85,7 @@ const donationData = [
 		image: dontation3,
 		currentAmount: 2490,
 		targetAmount: 4500,
-		rating: 4.8,
+		rate: 3.9,
 	},
 	{
 		category: "كفالات",
@@ -94,7 +94,7 @@ const donationData = [
 		image: dontation1,
 		currentAmount: 2490,
 		targetAmount: 4500,
-		rating: 4.8,
+		rate: 4.8,
 	},
 	{
 		category: "كفالات",
@@ -103,7 +103,7 @@ const donationData = [
 		image: dontation2,
 		currentAmount: 2490,
 		targetAmount: 4500,
-		rating: 4.8,
+		rate: 4.8,
 	},
 ];
 

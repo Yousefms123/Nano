@@ -169,16 +169,16 @@ const PaymentSection = () => {
 					<div className="flex flex-col gap-y-3 border-b pb-3 border-b-gray-300">
 						<p className="flex justify-between">
 							<span>المجموع</span>
-							<span>{amount} ر.ع</span>
+							<span>{amount} $</span>
 						</p>
 						<p className="flex justify-between">
 							<span>الخصم</span>
-							<span>0 ر.ع</span>
+							<span>0 $</span>
 						</p>
 					</div>
 					<p className="flex justify-between font-bold  mt-5">
 						<span>الإجمالي</span>
-						<span className="text-main-color">{amount} ر.ع</span>
+						<span className="text-main-color">{amount} $</span>
 					</p>
 				</div>
 			</div>
