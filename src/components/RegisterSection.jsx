@@ -12,7 +12,8 @@ const RegisterSection = () => {
 	const [stage, setStage] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [days, setDays] = useState("");
-	const [preferTime, setPreferTime] = useState("");
+	const [program, setProgram] = useState("");
+	const [addressLine, setAddressLine] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const alertRef = useRef();
@@ -28,7 +29,8 @@ const RegisterSection = () => {
 			"المرحلة الدراسية": stage,
 			"رقم الهاتف": phoneNumber,
 			"الأيام المناسبة": days,
-			"الوقت المفضل": preferTime,
+			"البرنامج المفضل": program,
+			"عنوان السكن": addressLine,
 		};
 		axios.post(url, studentData).then((response) => {
 			console.log(response);
@@ -37,7 +39,8 @@ const RegisterSection = () => {
 			setStage("");
 			setPhoneNumber("");
 			setDays("");
-			setPreferTime("");
+			setProgram("");
+			setAddressLine("");
 			setLoading(false);
 			setShowAlert(true);
 			setTimeout(() => {
@@ -71,7 +74,7 @@ const RegisterSection = () => {
 					<form className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-4" onSubmit={handleSubmit}>
 						<input
 							type="text"
-							placeholder="اسم الطالب كامل"
+							placeholder="اسم الطالب ثلاثي"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
@@ -88,51 +91,56 @@ const RegisterSection = () => {
 						/>
 
 						<Select
-							label="المرحلة الدراسية"
+							label="المؤهل الدراسي"
 							dir="rtl"
 							value={stage}
 							onChange={(val) => setStage(val)}
 						>
-							<Option value="ابتدائي">ابتدائي</Option>
-							<Option value="إعدادي">إعدادي</Option>
-							<Option value="ثانوي">ثانوي</Option>
+							<Option value="رياض أطفال">رياض أطفال</Option>
+							<Option value="طالب مدرسي">طالب مدرسي</Option>
+							<Option value="دبلوم عام">دبلوم عام</Option>
+							<Option value="دبلوم عالي">دبلوم عالي</Option>
+							<Option value="بكالوريوس">بكالوريوس</Option>
+							<Option value="ماجستير">ماجستير</Option>
+							<Option value="دكتوراة">دكتوراة</Option>
 						</Select>
 
 						<input
 							type="number"
-							placeholder="رقم التواصل"
+							placeholder="رقم التواصل (واتسأب)"
 							value={phoneNumber}
 							onChange={(e) => setPhoneNumber(e.target.value)}
 							required
 							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
+						<input
+							type="text"
+							placeholder="العنوان"
+							value={addressLine}
+							onChange={(e) => setAddressLine(e.target.value)}
+							required
+							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+						/>
 
-						<Select
-							label="الأيام المناسبة"
-							dir="rtl"
-							value={days}
-							onChange={(val) => setDays(val)}
-						>
-							<Option value="يوميًا">يوميًا</Option>
-							<Option value="5 أيام بالأسبوع">5 أيام بالأسبوع</Option>
-						</Select>
-
-						<Select
-							label="وقت الحصة المفضل"
-							dir="rtl"
-							value={preferTime}
-							onChange={(val) => setPreferTime(val)}
-						>
-							<Option value="الفجر">الفجر</Option>
-							<Option value="العصر">العصر</Option>
-							<Option value="المغرب">المغرب</Option>
-						</Select>
+						<div className="lg:col-span-2">
+							<Select
+								label="البرنامج"
+								dir="rtl"
+								value={program}
+								onChange={(val) => setProgram(val)}
+							>
+								<Option value="ما قبل المدرسة (برنامج البذرة المباركة)">
+									ما قبل المدرسة (برنامج البذرة المباركة)
+								</Option>
+								<Option value="إتقان التلاوة">إتقان التلاوة</Option>
+								<Option value=" الحفظ والمراجعة"> الحفظ والمراجعة</Option>
+								<Option value="الإقراء والإجازات">الإقراء والإجازات</Option>
+							</Select>
+						</div>
 
 						<MainButton
 							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl ${
-								loading
-									? "bg-main-color/65 cursor-wait "
-									: "bg-main-color text-white"
+								loading ? "bg-main-color/65 cursor-wait " : "bg-main-color text-white"
 							}`}
 							type="submit"
 							disabled={loading}
