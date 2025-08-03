@@ -25,13 +25,13 @@ const Brand = () => {
 						to={"/donate"}
 						className="text-base md:text-xl bg-button hover:bg-blue-900 rounded-full px-6 py-4 w-full"
 					>
-						تبرع من هنا
+						كن فاعل خير
 					</Button>
 					<Button
 						to={"/register"}
 						className="text-base md:text-xl border rounded-full px-6 py-4 w-full"
 					>
-						تسجيل طالب
+						انضم الينا
 					</Button>
 				</div>
 			</div>

@@ -6,11 +6,13 @@ import Statistic from "../components/Statistic";
 import EnrollmentSection from "../components/EnrollmentSection";
 
 import enrollment from "../assets/enrollment.png";
+import TrendingAds from "../components/TrendingAds";
 
 const Home = () => {
 	return (
 		<div>
 			<Brand />
+			<TrendingAds />
 			<DonationCard />
 			<CarouselWithContent />
 			<Statistic />

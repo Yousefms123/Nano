@@ -1,74 +1,91 @@
-import { useState } from "react";
 import { Star } from "lucide-react";
-import MainButton from "./Button";
-
-const Testimonials = ({ testimonials = [] }) => {
-	const [visibleCount, setVisibleCount] = useState(4);
-	const [isLoading, setIsLoading] = useState(false);
-
-	const handleLoadMore = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setVisibleCount((prev) => prev + 4);
-			setIsLoading(false);
-		}, 500);
-	};
-
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+const TestimonialsCarousel = ({ testimonials = [] }) => {
+	const prevRef = useRef(null);
+	const nextRef = useRef(null);
 	return (
-		<section>
-			<div className="grid gap-6 md:grid-cols-2 lg:px-28">
-				{testimonials.slice(0, visibleCount).map((testimonial, index) => (
-					<div
-						key={index}
-						className="bg-white border rounded-2xl p-4 flex flex-col gap-y-3 md:flex-row   gap-x-5"
-					>
-						<div className="w-[30%] md:w-[20%]">
-							<img
-								src={testimonial.image}
-								alt={testimonial.name}
-								className="w-full rounded-full object-cover mb-4"
-							/>
-						</div>
-						<div className="flex flex-col w-full">
-							<div className="flex w-full justify-between">
-								<h3 className="text-base font-semibold mb-2">{testimonial.name}</h3>
-								<div className="flex gap-1">
-									{[...Array(5)].map((_, i) => (
-										<Star
-											key={i}
-											size={20}
-											className={
-												i < testimonial.rating
-													? "text-amber-600 stroke-none"
-													: "text-gray-400"
-											}
-											fill={i < testimonial.rating ? "#d97706" : "none"}
-										/>
-									))}
-								</div>
-							</div>
-							<p className="text-gray-700 mb-4 text-start text-sm">{testimonial.text}</p>
-						</div>
-					</div>
-				))}
-			</div>
+		<section className="relative py-10">
+			<button
+				ref={nextRef}
+				className=" cursor-pointer absolute top-1/2 left-8 lg:left-10 z-10 -translate-y-[70%] -translate-x-1/3 lg:-translate-x-[100%] bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+			>
+				<ChevronLeft className="text-main-color" />
+			</button>
 
-			{visibleCount < testimonials.length && (
-				<div className="mt-14 flex items-center justify-center">
-					{isLoading ? (
-						<div className="text-main-color text-lg animate-pulse">جارٍ التحميل...</div>
-					) : (
-						<MainButton
-							onClick={handleLoadMore}
-							className="bg-main-color text-white text-lg rounded-full md:px-7 py-3"
-						>
-							اقرأ المزيد
-						</MainButton>
-					)}
-				</div>
-			)}
+			<button
+				ref={prevRef}
+				className="cursor-pointer absolute top-1/2 right-8 lg:right-10 z-10 -translate-y-[70%] -translate-x-1/3 lg:translate-x-[100%] bg-white p-2 md:p-4 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+			>
+				<ChevronRight className="text-main-color" />
+			</button>
+
+			<Swiper
+				modules={[Navigation]}
+				navigation={{
+					prevEl: prevRef.current,
+					nextEl: nextRef.current,
+				}}
+				onBeforeInit={(swiper) => {
+					swiper.params.navigation.prevEl = prevRef.current;
+					swiper.params.navigation.nextEl = nextRef.current;
+				}}
+				// centeredSlides={true}
+				loop={true}
+				spaceBetween={30}
+				// slidesPerView={1.1}
+				breakpoints={{
+					320: { slidesPerView: 1, spaceBetween: 5 },
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 30,
+					},
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 40,
+					},
+				}}
+				className="py-6"
+			>
+				{testimonials.map((testimonial, index) => (
+					<SwiperSlide key={index} className="flex justify-center pb-3">
+						<div className="bg-white border rounded-2xl p-6 flex flex-col gap-y-4  shadow-sm relative">
+							<div className="flex flex-col items-center text-center gap-y-3 mt-4">
+								<div className="w-20 h-20 rounded-full overflow-hidden mb-1">
+									<img
+										src={testimonial.image}
+										alt={testimonial.name}
+										className="w-full h-full object-cover"
+									/>
+								</div>
+								<h3 className="text-lg font-semibold">{testimonial.name}</h3>
+								<p className="text-gray-600 text-sm">{testimonial.text}</p>
+							</div>
+
+							<div className="flex justify-center gap-1 mt-2">
+								{[...Array(5)].map((_, i) => (
+									<Star
+										key={i}
+										size={18}
+										className={
+											i < testimonial.rating
+												? "text-amber-500 stroke-none"
+												: "text-gray-300"
+										}
+										fill={i < testimonial.rating ? "#d97706" : "none"}
+									/>
+								))}
+							</div>
+						</div>
+					</SwiperSlide>
+				))}
+			</Swiper>
 		</section>
 	);
 };
 
-export default Testimonials;
+export default TestimonialsCarousel;

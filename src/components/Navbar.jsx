@@ -11,7 +11,7 @@ const Navbar = () => {
 	const navItem = [
 		{ href: "/", text: "الرئيسية" },
 		{ href: "/about", text: "من نحن" },
-		{ href: "/revision", text: "المراجعات" },
+		{ href: "/revision", text: "قالو عنا" },
 		{ href: "/contact", text: "تواصل معنا" },
 	];
 
@@ -52,7 +52,7 @@ const Navbar = () => {
 								className="block py-2 px-3 text-white rounded-sm hover:underline"
 								onClick={() => setIsOpenMenu(false)}
 							>
-								سجل ابنك
+								انضم الينا
 							</Link>
 						</li>
 					</ul>
@@ -65,7 +65,7 @@ const Navbar = () => {
 							type="button"
 							className="text-white font-medium cursor-pointer text-sm px-4 py-2 text-center"
 						>
-							سجل ابنك
+							انضم الينا
 						</button>
 					</Link>
 
@@ -73,7 +73,7 @@ const Navbar = () => {
 						to={"/donate"}
 						className="text-white bg-button hover:bg-blue-900 transition-all duration-200 font-medium rounded-full text-sm lg:px-5 lg:py-3 text-center"
 					>
-						تبرع من هنا
+						كن فاعل خير
 					</MainButton>
 
 					{/* Mobile Toggle Button */}

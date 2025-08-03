@@ -50,10 +50,12 @@ const Footer = () => {
 		{
 			icon: <MapPin />,
 			text: "مركز المبنى بحي العوامر الشمالية (مقابل مسجد رحمة )",
+			link: "https://maps.app.goo.gl/yvgEzWaWq6eLbARW8",
 		},
 		{
 			icon: <MapPin />,
 			text: "مبنى المركز بالمعلبية الجنوبية ( حي الرحبة) - الشارع 99",
+			link: "https://maps.app.goo.gl/RpvYoS55tPbWjQNV8",
 		},
 	];
 	return (
@@ -110,7 +112,7 @@ const Footer = () => {
 									key={index}
 									className="text-gray-600 text-sm md:text-xl text-start mt-5 flex items-center gap-x-4"
 								>
-									{item.icon}| <span>{item.text}</span>
+									{item.icon}| <Link to={item.link} target="_blanck">{item.text}</Link>
 								</li>
 							))}
 						</ul>
@@ -118,8 +120,7 @@ const Footer = () => {
 				</div>
 				<div className="pb-5 border-b-2 border-gray-400">
 					<iframe
-						title="Google Map"
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.0769367034673!2d58.13999382521145!3d23.63741559310554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8de3d9badaeb93%3A0x60dd73d261452614!2z2YHZhtiv2YIg2KfZhNmG2KzZhdipINin2YTZhdin2LPZitip!5e0!3m2!1sar!2s!4v1752664643546!5m2!1sar!2s"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.9520831951054!2d58.2258622!3d23.641887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8dfd389a330f0f%3A0x5171ffff875cb636!2z2YXYsdmD2LIg2KfZhNiz2YrYqCDYp9mE2YLYsdii2YbZiiAtINin2YTYrNmF2LnZitipINin2YTYudmF2KfZhtmK2Kkg2YTZhNi52YbYp9mK2Kkg2KjYp9mE2YLYsdii2YYg2KfZhNmD2LHZitmF!5e0!3m2!1sar!2s!4v1754217694057!5m2!1sar!2s"
 						width="100%"
 						height="100%"
 						style={{ border: 0 }}

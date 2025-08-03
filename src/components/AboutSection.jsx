@@ -9,19 +9,19 @@ import { HandCoins, Star, CalendarDays, BookOpen } from "lucide-react";
 const goalsData = [
 	{
 		icon: <BookOpen size={40} className="text-red-900" />,
-		text: "تعليم العقيدة، والفقه، والتفسير بأسلوب بسيط",
+		text: "نشر الوعي بأهمية القرآن الكريم وضرورة العناية به لشرائح المجتمع كافة",
 	},
 	{
 		icon: <CalendarDays size={40} className="text-red-900" />,
-		text: "توفير دروس ومحاضرات بالصوت والصورة",
+		text: "تحفيظ القرآن الكريم وبث روح التنافس فيما بين الراغبين في الحفظ",
 	},
 	{
 		icon: <Star size={40} className="text-red-900" />,
-		text: "دعم المشاريع التعليمية للفتيات والناشئة",
+		text: "تعليم المجتمع تلاوة القرآن الكريم وترتيله بالقراءات القرآنية المعتبرة",
 	},
 	{
 		icon: <HandCoins size={40} className="text-red-900" />,
-		text: "فتح باب التبرع للمشاركة في الأجر والثواب",
+		text: "صقل مواهب القاء العمانيين والعناية بالأصوات القرآنية بتدريبها",
 	},
 ];
 
@@ -45,11 +45,14 @@ const AboutSection = () => {
 					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">نبذة عنا</h1>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
 						مركز السيب القرآني هو مؤسسة تعليمية تهدف إلى نشر وتعليم كتاب الله لجميع الفئات
-						العمرية، من الأطفال إلى الكبار.
+						العمرية، من الأطفال إلى الكبار. نسعى في المركز إلى توفير بيئة محفزة ومناسبة لحفظ
+						وتدبر القرآن الكريم، باستخدام أساليب تعليمية حديثة تجمع بين الأصالة والتكنولوجيا
+						الحديثة.
 					</p>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						نسعى في المركز إلى توفير بيئة محفزة ومناسبة لحفظ وتدبر القرآن الكريم، باستخدام
-						أساليب تعليمعم الحفظ والفهم والتطبيق العملي للقرآن الكريم في حياة الطالب اليومية.
+						نقدم برامج متنوعة تشمل حلقات تحفيظ، دروس تفسير، دورات في التجويد، وبرامج تدريبية
+						للمعلمين. يتميز مركزنا بكادر تعليمي متخصص، وبرامج تفاعلية تدعم الحفظ والفهم والتطبيق
+						العملي للقرآن الكريم في حياة الطالب اليومية.
 					</p>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
 						كما نسعى إلى توسيع نطاق التأثير المجتمعي من خلال الشراكات، والمبادرات الخيرية،
@@ -76,16 +79,17 @@ const AboutSection = () => {
 				<div className="flex flex-col items-center lg:items-start text-center lg:text-right w-full lg:w-1/2 order-1 lg:order-2">
 					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">رسالتنا</h1>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						نُقدّم محتوى إسلامياً نقيّاً، يربط المسلم بربّه، ويقوي صلته بالقرآن والسنة، بعيدًا
-						عن التعقيد أو التمييع.
+						<span className="font-bold">رسالتنا</span> هي السعي لإعداد مجتمع متقن لتلاوة القرآن
+						الكريم، وحفظه، وترتيله، واتباعه، وتدبره في سلطنة عمان، من خلال: برامج، ومشاريع،
+						وأنشطة؛ تجمع بين: الأصالة والمعاصرة .
 					</p>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						نؤمن أن العلم الشرعي حق لكل مسلم، وأن التبرع لنشره هو صدقة جارية لا تنقطع.
+						<span className="font-bold">رؤيتنا</span> هي الريادة في تعليم القرآن الكريم وتحفيظه
+						لشرائح المجتمع كافة .
 					</p>
 					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						عى لتقديم برامج تعليمية ودعوية ذات جودة عالية، تشمل مقاطع مرئية، دروس مباشرة،
-						ومقالات علمية مبسطة. رؤيتنا أن نكون منبرًا يُعيد للمسلمين صلتهم الأصيلة بدينهم،
-						ويوفر لهم بيئة آمنة وموثوقة لتعلم الدين من مصادره الصحيحة.
+						<span className="font-bold">قيم الجمعية</span> هي المبادئ والأخلاق الاسلامية ,
+						المشاركة والمساءلة والشفافية , الاتقان والتمييز الاداري , العمل بروح الفريق
 					</p>
 					<MainButton
 						to={"/contact"}
@@ -103,7 +107,7 @@ const AboutSection = () => {
 					/>
 				</div>
 			</div>
-			<section className="bg-main-color/50 py-16 flex flex-wrap  ">
+			<section className="bg-main-color/50 py-16 flex flex-wrap mt-8">
 				<div className="w-4/5  lg:w-3/4 flex flex-col items-center justify-center mx-auto">
 					<h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">أهدافنا</h2>
 
@@ -116,26 +120,28 @@ const AboutSection = () => {
 			</section>
 			<div className="flex flex-col lg:flex-row  justify-between gap-10 p-4 mt-16 md:px-20 lg:px-28">
 				<div className="flex flex-col gap-y-3 md:gap-y-11 items-center lg:items-start text-center lg:text-right w-full lg:w-1/2 order-2 lg:order-1">
-					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">كيف يمكنك المساهمة؟</h1>
+					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">الجوائز والانجازات</h1>
 					<ul className="font-Tajawal list-disc">
-						<li className="text-lg md:text-lg lg:text-3xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							بالدعاء لنا{" "}
+						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
+							المركز الأول لمسابقة معايير التميز لمراكز الجمعية العمانية للعلناية بالقرآن
+							الكريم لعام 1444هـ / 2022م{" "}
 						</li>
-						<li className="text-lg md:text-lg lg:text-3xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							بنشر المحتوى{" "}
+						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
+							المركز الثاني لمسابقة معايير التميز لمراكز الجمعية العمانية للعناية بالقرآن
+							الكريم لعام 1445 هـ / 2023 م{" "}
 						</li>
-						<li className="text-lg md:text-lg lg:text-3xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							بالتبرع لدعم مشاريعنا (التعليمية والدعوية){" "}
+						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
+							أكثر من 60 الف مستفيد من برامج ودورات المركز{" "}
 						</li>
 					</ul>
 					<p className="font-Amiri text-lg md:text-lg lg:text-3xl">
 						قال ﷺ:"إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية أو علم يُنتفع به...
 					</p>
 					<MainButton
-						to={"/donate"}
-						className="text-center bg-button w-1/2 max-w-xs text-white px-4 py-2  md:px-6 md:py-3 rounded-full text-lg lg:text-xl"
+						to={"/contact"}
+						className="text-center bg-main-color w-1/2 max-w-xs text-white px-4 py-2  md:px-6 md:py-3 rounded-full text-lg lg:text-xl"
 					>
-						تبرع من هنا
+						تواصل معنا
 					</MainButton>
 				</div>
 
