@@ -16,7 +16,7 @@ const Navbar = () => {
 	];
 
 	return (
-		<nav className="bg-main-color fixed w-full z-20 top-0 start-0  shadow-lg  font-Tajawal">
+		<nav className="bg-main-color fixed w-full z-50 top-0 start-0  shadow-lg  font-Tajawal">
 			<div className=" flex flex-wrap items-center justify-between mx-auto px-4 lg:px-12 py-4">
 				{/* Logo */}
 				<Link to={"/"} className="flex items-center">
