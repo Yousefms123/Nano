@@ -93,41 +93,6 @@ postcss.config.js, tailwind.config.js, vite.config.js: Configuration files for P
 •
 vercel.json: Vercel deployment configuration file.
 
-How to Work on the Project (Installation and Running)
-
-To get started with the Nano project, follow these steps:
-
-1.
-Clone the repository:
-
-2.
-Install dependencies:
-
-3.
-Run the development server:
-
-4.
-Build the project for production:
-
-Contributing
-
-We welcome contributions to the Nano project! If you'd like to contribute, please follow these guidelines:
-
-1.
-Fork the repository.
-
-2.
-Create a new branch for your feature or bug fix: git checkout -b feature/your-feature-name or bugfix/your-bug-name.
-
-3.
-Make your changes and test them.
-
-4.
-Commit your changes: git commit -m "Add new feature".
-
-5.
-Push to your branch: git push origin feature/your-feature-name.
-
 6.
 Open a Pull Request to the main branch of the original repository.
 
