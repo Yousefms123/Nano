@@ -45,7 +45,7 @@ const Statistic = () => {
 	});
 	return (
 		<div ref={ref} className="py-12 px-4 bg-white font-Tajawal">
-			<h2 className="text-2xl md:text-3xl font-bold text-center mb-10">ارقام واحصائيات</h2>
+			<h2 className="text-2xl md:text-3xl font-bold text-center mb-10">أرقام وإحصائيات</h2>
 
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
 				{stats.map((stat) => (

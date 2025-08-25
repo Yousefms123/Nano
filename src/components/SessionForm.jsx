@@ -6,13 +6,12 @@ import { Check, CheckCircle } from "lucide-react";
 import axios from "axios";
 const SessionFrom = () => {
 	// const [showAlert, setShowAlert] = useState(false);
-	const [program, setProgram] = useState("");
+	const [target, setTarget] = useState("");
 	const [sessionName, setSesionName] = useState("");
 	const [teacherPhone, setTeacherPhone] = useState("");
 	const [teacherName, setTeacherName] = useState("");
 	const [supervisorPhone, setSupervisorPhone] = useState("");
 	const [supervisorName, setSupervisorName] = useState("");
-	const [addressLine, setAddressLine] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const alertRef = useRef();
@@ -23,24 +22,22 @@ const SessionFrom = () => {
 		setLoading(true);
 		const url = "https://sheetdb.io/api/v1/5z96qv93ef37w?sheet=session-information";
 		const studentData = {
-			"اسم البرنامج": program,
+			"الفئة المستهدفة": target,
 			"اسم الحلقة": sessionName,
-			"موقع الحلقة": addressLine,
 			"معلم الحلقة": teacherName,
 			"رقم هاتف معلم الحلقة": teacherPhone,
-			"مشرف الحلقة": supervisorName,
-			"رقم هاتف مشرف الحلقة": supervisorPhone,
+			"وكيل المدرسة": supervisorName,
+			"رقم هاتف وكيل المدرسة": supervisorPhone,
 		};
 		axios.post(url, studentData).then((response) => {
 			console.log(response);
 
-			setProgram("");
+			setTarget("");
 			setSesionName("");
 			setTeacherPhone("");
 			setTeacherName("");
 			setSupervisorPhone("");
 			setSupervisorName("");
-			setAddressLine("");
 			setLoading(false);
 			setShowAlert(true);
 			setTimeout(() => {
@@ -50,7 +47,7 @@ const SessionFrom = () => {
 	};
 
 	return (
-		<div className="">
+		<div className="font-Tajawal">
 			{showAlert && (
 				<div
 					ref={alertRef}
@@ -73,36 +70,13 @@ const SessionFrom = () => {
 						</p>
 					</div>
 					<form className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-4" onSubmit={handleSubmit}>
-						<div className="lg:col-span-2">
-							<Select
-								label="اسم البرنامج"
-								dir="rtl"
-								value={program}
-								onChange={(val) => setProgram(val)}
-							>
-								<Option value="ما قبل المدرسة (برنامج البذرة المباركة)">
-									ما قبل المدرسة (برنامج البذرة المباركة)
-								</Option>
-								<Option value="إتقان التلاوة">إتقان التلاوة</Option>
-								<Option value=" الحفظ والمراجعة"> الحفظ والمراجعة</Option>
-								<Option value="الإقراء والإجازات">الإقراء والإجازات</Option>
-							</Select>
-						</div>
 						<input
 							type="text"
-							placeholder="اسم الحلقة"
+							placeholder="اسم الحلقة / المسجد "
 							value={sessionName}
 							onChange={(e) => setSesionName(e.target.value)}
 							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
-						/>
-						<input
-							type="text"
-							placeholder="موقع الحلقة"
-							value={addressLine}
-							onChange={(e) => setAddressLine(e.target.value)}
-							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="text"
@@ -110,7 +84,7 @@ const SessionFrom = () => {
 							value={teacherName}
 							onChange={(e) => setTeacherName(e.target.value)}
 							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg  w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="number"
@@ -118,27 +92,40 @@ const SessionFrom = () => {
 							value={teacherPhone}
 							onChange={(e) => setTeacherPhone(e.target.value)}
 							required
-							className="w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="text"
-							placeholder="مشرف الحلقة"
+							placeholder="وكيل المدرسة"
 							value={supervisorName}
 							onChange={(e) => setSupervisorName(e.target.value)}
 							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg  w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="number"
-							placeholder="رقم هاتف مشرف الحلقة"
+							placeholder="رقم هاتف وكيل المدرسة"
 							value={supervisorPhone}
 							onChange={(e) => setSupervisorPhone(e.target.value)}
 							required
-							className="w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
-
+						<div className="lg:col-span-2 z-[999]">
+							<Select
+								label="الفئة المستهدفة"
+								dir="rtl"
+								value={target}
+								onChange={(val) => setTarget(val)}
+							>
+								<Option value="طلاب">طلاب </Option>
+								<Option value="طالبات">طالبات</Option>
+								<Option value=" رجال"> رجال</Option>
+								<Option value="نساء">نساء</Option>
+								<Option value=" جميع الأعمار">جميع الأعمار</Option>
+							</Select>
+						</div>
 						<MainButton
-							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl ${
+							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-sm md:text-base lg:text-lg ${
 								loading ? "bg-main-color/65 cursor-wait " : "bg-main-color text-white"
 							}`}
 							type="submit"

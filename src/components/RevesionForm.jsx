@@ -6,45 +6,26 @@ import Testimonials from "./Testimonials";
 import user1 from "../assets/user1.png";
 import user2 from "../assets/user2.png";
 import user3 from "../assets/user3.png";
-import user4 from "../assets/user4.png";
 
-const userImages = [user1, user2, user3, user4];
+const userImages = [user1, user2, user3];
 
 const initialTestimonials = [
 	{
-		name: "سمير سرحان",
+		name: "علي بن عبد الله الحبسي",
 		image: user1,
-		text: "ابني الصغير أصبح متعلقًا بالقرآن وأحب الذهاب للحلقة كل أسبوع.",
+		text: "مركز السيب القرآني هو مركز خيري , أتمنى من الجميع دعم هذا المركز , ومراكز القرآن هي مهمة في المجتمع",
 		rating: 4,
 	},
 	{
-		name: "خالد شحادة",
+		name: "د.عبدالله بن سالم الهنائي",
 		image: user2,
-		text: "المعلمون رائعون في التعامل مع الأطفال.",
+		text: "تقوم الجمعية العمانية للعناية بالقرآن الكريم بدور جبار في خدمة المجتمع العماني بنشر الثقافة القرآنية , ومن اهم مراكز الجمعية مركز السيب القرآني الذي يقوم بأدوار مختلفة وانشطة متعددة",
 		rating: 4,
 	},
 	{
-		name: "قيس محمد",
+		name: "هزاع بن عبدالله البلوشي",
 		image: user3,
-		text: "تبرعت من خلال الموقع وسُررت بسرعة الرد.",
-		rating: 5,
-	},
-	{
-		name: "اسامة الشرفا",
-		image: user4,
-		text: "أجواء المركز هادئة ومليئة بالإيمان...",
-		rating: 5,
-	},
-	{
-		name: "خالد شحادة",
-		image: user2,
-		text: "المعلمون رائعون في التعامل مع الأطفال.",
-		rating: 4,
-	},
-	{
-		name: "قيس محمد",
-		image: user3,
-		text: "تبرعت من خلال الموقع وسُررت بسرعة الرد.",
+		text: "نشجع التجار وارجال الأعمال والمؤسسات بدعم المراكز القرآنية ٫ وبالأخص الجمعية العمانية للعناية بالقرآن الكريم",
 		rating: 5,
 	},
 ];

@@ -3,11 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
-@theme {
-}
+
+/* استدعاء CSS الخاص بـ Flowbite بعد Tailwind */
+@import "flowbite/dist/flowbite.css";
+
 body {
 	font-family: var(--font-Tajawal);
 }
@@ -39,4 +38,9 @@ body {
 	display: flex;
 	align-items: center;
 	right: 7px !important ;
+}
+.react-datepicker-wrapper,
+.react-datepicker__input-container input {
+	width: 100%;
+	font-size: 16px;
 }

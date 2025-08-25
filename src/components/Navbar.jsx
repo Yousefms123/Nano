@@ -52,7 +52,7 @@ const Navbar = () => {
 								className="block py-2 px-3 text-white rounded-sm hover:underline"
 								onClick={() => setIsOpenMenu(false)}
 							>
-								انضم الينا
+								انضم إلينا
 							</Link>
 						</li>
 					</ul>
@@ -65,7 +65,7 @@ const Navbar = () => {
 							type="button"
 							className="text-white font-medium cursor-pointer text-sm px-4 py-2 text-center"
 						>
-							انضم الينا
+							انضم إلينا
 						</button>
 					</Link>
 

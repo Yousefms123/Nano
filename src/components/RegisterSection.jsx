@@ -10,6 +10,7 @@ import StudentForm from "./StudentForm";
 import TeacherFrom from "./TeacherForm";
 import SupervisorForm from "./SupervisorForm";
 import SessionFrom from "./SessionForm";
+import VolunteerForm from "./VolunteerForm";
 const RegisterSection = () => {
 	const [activeTab, setActiveTab] = useState("تسجيل طالب");
 	const data = [
@@ -29,6 +30,11 @@ const RegisterSection = () => {
 			desc: <SupervisorForm />,
 		},
 		{
+			label: "تسجيل متطوع",
+			value: "تسجيل متطوع",
+			desc: <VolunteerForm />,
+		},
+		{
 			label: "تسجيل حلقة",
 			value: "تسجيل حلقة",
 			desc: <SessionFrom />,
@@ -36,10 +42,10 @@ const RegisterSection = () => {
 	];
 
 	return (
-		<div className="lg:px-28">
+		<div className="lg:px-28 font-Tajawal">
 			<Tabs className="" value={activeTab}>
 				<TabsHeader
-					className="rounded-none  border-blue-gray-50 bg-transparent p-0 w-[100%] md:w-[80%] md:mx-auto lg:w-[50%] lg:mx-0"
+					className="rounded-none  border-blue-gray-50 bg-transparent py-3  md:w-[80%] md:mx-auto lg:w-[60%] lg:mx-0 xs:overflow-x-auto xs:whitespace-nowrap xs:scrollbar-hide"
 					indicatorProps={{
 						className: "bg-transparent border-b-2 border-main-color shadow-none rounded-none",
 					}}
@@ -51,7 +57,7 @@ const RegisterSection = () => {
 							onClick={() => setActiveTab(value)}
 							className={
 								activeTab === value
-									? "text-main-color text-xs md:text-lg font-Tajawal font-bold transition-all duration-100"
+									? "text-main-color text-xs md:text-lg font-Tajawal font-bold transition-all duration-100 "
 									: "text-xs md:text-lg font-Tajawal"
 							}
 						>

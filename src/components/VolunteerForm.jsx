@@ -4,11 +4,11 @@ import { Option, Select } from "@material-tailwind/react";
 import { Check, CheckCircle } from "lucide-react";
 
 import axios from "axios";
-const TeacherFrom = () => {
+const VolunteerForm = () => {
 	// const [showAlert, setShowAlert] = useState(false);
 	const [name, setName] = useState("");
+	const [volunteerTrack, setVolunteerTrack] = useState("");
 	const [gender, setGender] = useState("");
-	const [nationality, setNationality] = useState("");
 	const [courses, setCourses] = useState("");
 	const [stage, setStage] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -21,25 +21,25 @@ const TeacherFrom = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		const url = "https://sheetdb.io/api/v1/5z96qv93ef37w?sheet=teacher-information";
+		const url = "https://sheetdb.io/api/v1/5z96qv93ef37w?sheet=volunteer-information";
 		const studentData = {
-			"اسم المعلم ثلاثي": name,
-			"جنسية المعلم": nationality,
-			"المؤهل الدراسي للمعلم": stage,
-			"رقم هاتف المعلم": phoneNumber,
-			"الدورات التأهيلية للمعلم": courses,
-			"عنوان سكن المعلم": addressLine,
-			"جنس المعلم": gender,
+			"اسم المتطوع ثلاثي": name,
+			"المؤهل الدراسي": stage,
+			"رقم هاتف المتطوع": phoneNumber,
+			"الخبرات العملية": courses,
+			"عنوان سكن المتطوع": addressLine,
+			"جنس المتطوع": gender,
+			"جوانب التطوع": volunteerTrack,
 		};
 		axios.post(url, studentData).then((response) => {
 			console.log(response);
 			setName("");
-			setNationality("");
-			setStage("");
 			setGender("");
+			setStage("");
 			setPhoneNumber("");
 			setCourses("");
 			setAddressLine("");
+			setVolunteerTrack("");
 			setLoading(false);
 			setShowAlert(true);
 			setTimeout(() => {
@@ -64,30 +64,41 @@ const TeacherFrom = () => {
 				<div className="flex flex-col gap-y-7 text-start ">
 					<div>
 						<h1 className="text-lg md:text-xl lg:text-3xl font-bold mb-4">
-							تسجيل المعلمين في حلقات القرآن الكريم
+							تسجيل المتطوعين في حلقات القرآن الكريم
 						</h1>
 						<p className="text-sm lg:text-lg text-gray-700">
-							نسعد بانضمامكم الى مركز السيب القرآني , فضلاً قم بتعبئة النموذج الآتي ,
-							وسيتواصل معكم - بمشيئة الله تعالى - حسب توفر الشواغر في الحلقات.
+							نرحب بكم في أسرة مركز السيب القرآني , يرجى تعبئة النموذج الآتي ؛ لنتمكن من
+							التواصل معكم - بمشيئة الله تعالى - ؛ حسب الحاجة
 						</p>
 					</div>
 					<form className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-4" onSubmit={handleSubmit}>
 						<input
 							type="text"
-							placeholder="اسم المعلم ثلاثي"
+							placeholder="اسم المتطوع ثلاثي"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
-							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className=" text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
-
 						<input
 							type="text"
-							placeholder="الجنسية"
-							value={nationality}
-							onChange={(e) => setNationality(e.target.value)}
+							placeholder="الولاية / القرية"
+							value={addressLine}
+							onChange={(e) => setAddressLine(e.target.value)}
 							required
-							className="text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className=" text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+						/>
+						<Select label="الجنس" dir="rtl" value={gender} onChange={(val) => setGender(val)}>
+							<Option value="ذكر">ذكر</Option>
+							<Option value="أنثى">أنثى</Option>
+						</Select>
+						<input
+							type="number"
+							placeholder="رقم التواصل (واتسأب)"
+							value={phoneNumber}
+							onChange={(e) => setPhoneNumber(e.target.value)}
+							required
+							className=" text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 
 						<Select
@@ -104,34 +115,30 @@ const TeacherFrom = () => {
 						</Select>
 
 						<input
-							type="number"
-							placeholder="رقم التواصل (واتسأب)"
-							value={phoneNumber}
-							onChange={(e) => setPhoneNumber(e.target.value)}
-							required
-							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
-						/>
-						<input
 							type="text"
-							placeholder="الولاية / القرية"
-							value={addressLine}
-							onChange={(e) => setAddressLine(e.target.value)}
-							required
-							className="text-sm md:text-base lg:text-lg  w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
-						/>
-						<Select label="الجنس" dir="rtl" value={gender} onChange={(val) => setGender(val)}>
-							<Option value="ذكر">ذكر</Option>
-							<Option value="أنثى">أنثى</Option>
-						</Select>
-						<textarea
-							type="text"
-							placeholder="نبذة مختصرة عن الخبرة العملية"
+							placeholder="الخبرات العلمية , والمهنية"
 							value={courses}
 							onChange={(e) => setCourses(e.target.value)}
 							required
-							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className=" text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
-
+						<div className="lg:col-span-2">
+							<Select
+								label="جوانب التطوع"
+								dir="rtl"
+								value={volunteerTrack}
+								onChange={(val) => setVolunteerTrack(val)}
+							>
+								<Option value="التدريس">التدريس</Option>
+								<Option value="إدارة الحلقات">إدارة الحلقات</Option>
+								<Option value="تنظيم الفعاليات والمسابقات">
+									تنظيم الفعاليات والمسابقات
+								</Option>
+								<Option value="التسويق">التسويق</Option>
+								<Option value="التصميم الجرافيكي">التصميم الجرافيكي</Option>
+								<Option value="التصوير الفوتوغرافي">التصوير الفوتوغرافي</Option>
+							</Select>
+						</div>
 						<MainButton
 							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-sm md:text-base lg:text-lg ${
 								loading ? "bg-main-color/65 cursor-wait " : "bg-main-color text-white"
@@ -155,4 +162,4 @@ const TeacherFrom = () => {
 	);
 };
 
-export default TeacherFrom;
+export default VolunteerForm;

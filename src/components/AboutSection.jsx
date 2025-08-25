@@ -40,25 +40,22 @@ const GoalCard = ({ icon, text }) => {
 const AboutSection = () => {
 	return (
 		<section>
-			<div className="flex flex-col lg:flex-row  justify-between gap-10 p-4 md:px-20 lg:px-28">
+			<div className="flex flex-col lg:flex-row  justify-between gap-10 p-4 md:px-20 lg:px-28 font-Tajawal">
 				<div className="flex flex-col items-center lg:items-start text-center lg:text-right w-full lg:w-1/2 order-2 lg:order-1">
 					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">نبذة عنا</h1>
-					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						مركز السيب القرآني هو مؤسسة تعليمية تهدف إلى نشر وتعليم كتاب الله لجميع الفئات
-						العمرية، من الأطفال إلى الكبار. نسعى في المركز إلى توفير بيئة محفزة ومناسبة لحفظ
-						وتدبر القرآن الكريم، باستخدام أساليب تعليمية حديثة تجمع بين الأصالة والتكنولوجيا
-						الحديثة.
+					<p className="text-sm  md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
+						مركز السيب القرآني أحد فروع الجمعية العمانية للعناية بالقرآن الكريم في سلطنة عمان.
+						وهو مركز تعليمي يهدف إلى نشر وتعليم كتاب الله؛ لجميع الفئات العمرية، من الأطفال إلى
+						الكبار. نسعى في مركز السيب إلى توفير بيئة محفزة ومناسبة لحفظ وتعلم القرآن الكريم،
+						باستخدام أساليب تعليمية حديثة تجمع بين الأصالة والتكنولوجيا الحديثة. نقدم برامج
+						متنوعة تشمل حلقات تحفيظ، دورات في التجويد، وبرامج تدريبية للمعلمين والمعلمات. يتميز
+						مركزنا بإدارة تعليمية متخصصة، وبرامج تفاعلية تدعم الحفظ والفهم والتطبيق العملي
+						للقرآن الكريم في حياة الطالب اليومية. كما نسعى إلى توسيع نطاق التأثير المجتمعي من
+						خلال الشراكات، والمبادرات الخيرية، والأنشطة التي تعزز القيم القرآنية في المجتمع.
+						رؤيتنا أن نكون منارة تعليمية رائدة في تعليم القرآن الكريم، تساهم في بناء جيل واعٍ
+						بقيمه ودينه.
 					</p>
-					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						نقدم برامج متنوعة تشمل حلقات تحفيظ، دروس تفسير، دورات في التجويد، وبرامج تدريبية
-						للمعلمين. يتميز مركزنا بكادر تعليمي متخصص، وبرامج تفاعلية تدعم الحفظ والفهم والتطبيق
-						العملي للقرآن الكريم في حياة الطالب اليومية.
-					</p>
-					<p className="text-base md:text-lg lg:text-xl leading-relaxed lg:leading-9 mb-6">
-						كما نسعى إلى توسيع نطاق التأثير المجتمعي من خلال الشراكات، والمبادرات الخيرية،
-						والأنشطة التي تعزز القيم القرآنية في المجتمع. رؤيتنا أن نكون منارة تعليمية رائدة في
-						تعليم القرآن الكريم، تساهم في بناء جيل واعٍ بقيمه ودينه.
-					</p>
+
 					<MainButton
 						to={"/contact"}
 						className="text-center bg-main-color w-1/2 max-w-xs text-white px-4 py-2  md:px-6 md:py-3 rounded-full text-lg lg:text-xl"
@@ -123,15 +120,15 @@ const AboutSection = () => {
 					<h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">الجوائز والانجازات</h1>
 					<ul className="font-Tajawal list-disc">
 						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							المركز الأول لمسابقة معايير التميز لمراكز الجمعية العمانية للعلناية بالقرآن
-							الكريم لعام 1444هـ / 2022م{" "}
+							المركز الأول؛ لمسابقة معايير التميز لمراكز الجمعية العمانية للعلناية بالقرآن
+							الكريم لعام 1444هـ / 2022م.{" "}
 						</li>
 						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							المركز الثاني لمسابقة معايير التميز لمراكز الجمعية العمانية للعناية بالقرآن
-							الكريم لعام 1445 هـ / 2023 م{" "}
+							المركز الثاني؛ لمسابقة معايير التميز لمراكز الجمعية العمانية للعناية بالقرآن
+							الكريم لعام 1445 هـ / 2023م.
 						</li>
 						<li className="text-sm md:text-lg lg:text-2xl text-gray-800 leading-relaxed lg:leading-9 mb-6">
-							أكثر من 60 الف مستفيد من برامج ودورات المركز{" "}
+							أكثر من(60) ألف مستفيد من برامج ودورات المركز.
 						</li>
 					</ul>
 					<p className="font-Amiri text-lg md:text-lg lg:text-3xl">

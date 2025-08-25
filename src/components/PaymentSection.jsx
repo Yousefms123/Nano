@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 import { Checkbox, Option, Select } from "@material-tailwind/react";
-import { Check } from "lucide-react";
+import { Check, Loader } from "lucide-react";
 import { useData } from "../data/dataContext";
+// import axios from "axios";
 
 const PaymentSection = () => {
 	const [params] = useSearchParams();
+	// const navigate = useNavigate();
 	const { cardData, donationData } = useData();
+	const [isLoading, setIsLoading] = useState(false);
+	const [formData, setFormData] = useState({
+		email: "",
+		firstName: "",
+		lastName: "",
+		address: "",
+		city: "",
+		region: "",
+		postalCode: "",
+		country: "عُمان",
+	});
 
 	const title = params.get("title") || "";
 	const amount = params.get("amount") || "10";
@@ -20,17 +33,55 @@ const PaymentSection = () => {
 	const desc = project.description;
 	const img = project.image;
 
+	const handleInputChange = (e) => {
+		const { name, value, type, checked } = e.target;
+		setFormData({
+			...formData,
+			[name]: type === "checkbox" ? checked : value,
+		});
+	};
+
+	const handleCountryChange = (value) => {
+		setFormData({
+			...formData,
+			country: value,
+		});
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setIsLoading(true);
+
+		try {
+			// 🔹 اعمل محاكاة (simulate) كأنه في سيرفر بيرجع session_url
+			setTimeout(() => {
+				setIsLoading(false);
+
+				// بدل ما يروح لبوابة دفع حقيقية، رح يروح على صفحة وهمية عندك
+				window.location.href = "/success?amount=" + amount + "&title=" + title;
+			}, 2000); // 2 ثواني محاكاة للتحميل
+		} catch (error) {
+			console.error("Payment error:", error);
+			setIsLoading(false);
+			alert("حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.");
+		}
+	};
+
 	return (
 		<div className="mt-20 px-6 lg:px-28 flex flex-col lg:flex-row gap-10 font-Tajawal">
 			<div className="w-full lg:w-2/3 text-start">
 				<h2 className="text-xl font-bold mb-2">معلومات جهة الاتصال</h2>
 				<p className="mb-6">سنستخدم هذا البريد الإلكتروني لنرسل إليك تفاصيل وتحديثات بشأن طلبك.</p>
-				<form>
+				<form onSubmit={handleSubmit}>
 					<div className="flex flex-col gap-y-8">
 						<input
 							type="email"
+							name="email"
+							value={formData.email}
+							onChange={handleInputChange}
 							placeholder="البريد الإلكتروني"
 							className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+							required
 						/>
 						<div>
 							<h1 className="text-lg md:text-xl lg:text-3xl font-bold mb-4">
@@ -42,114 +93,94 @@ const PaymentSection = () => {
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2  gap-4">
 							<div className="">
-								<Select label="اختر البلد" dir="rtl" className="">
-									<Option>عُمان</Option>
-									<Option>مصر</Option>
-									<Option>السعودية</Option>
+								<Select
+									label="اختر البلد"
+									dir="rtl"
+									value={formData.country}
+									onChange={handleCountryChange}
+									className=""
+								>
+									<Option value="عُمان">عُمان</Option>
+									<Option value="مصر">مصر</Option>
+									<Option value="السعودية">السعودية</Option>
 								</Select>
 							</div>
 							<input
 								type="text"
+								name="address"
+								value={formData.address}
+								onChange={handleInputChange}
 								placeholder="العنوان"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 							<input
 								type="text"
+								name="firstName"
+								value={formData.firstName}
+								onChange={handleInputChange}
 								placeholder="الاسم الأول"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 							<input
 								type="text"
+								name="lastName"
+								value={formData.lastName}
+								onChange={handleInputChange}
 								placeholder="الاسم الأخير"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 							<input
 								type="text"
+								name="city"
+								value={formData.city}
+								onChange={handleInputChange}
 								placeholder="المدينة"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 							<input
 								type="text"
-								placeholder="العنوان"
-								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
-							/>
-							<input
-								type="text"
+								name="region"
+								value={formData.region}
+								onChange={handleInputChange}
 								placeholder="المنطقة"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 							<input
 								type="text"
+								name="postalCode"
+								value={formData.postalCode}
+								onChange={handleInputChange}
 								placeholder="الرمز البريدي"
 								className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transtion-all duration-200"
+								required
 							/>
 
-							<h3 className="lg:col-span-2 mt-6 text-lg font-semibold">خيارات الدفع</h3>
-							<div className="lg:col-span-2 flex gap-6 mb-2">
-								<label className="flex items-center gap-2">
-									<input type="radio" name="payment" defaultChecked />
-									<span>Credit Card</span>
-								</label>
-								<label className="flex items-center gap-2">
-									<input type="radio" name="payment" />
-									<span>PayPal</span>
-								</label>
+							<h3 className="lg:col-span-2 mt-6 text-lg font-semibold">معلومات إضافية</h3>
+							<div className="lg:col-span-2">
+								<p className="text-sm text-gray-600 mb-4">
+									سيتم تحويلك إلى صفحة الدفع الآمنة بعد تأكيد المعلومات
+								</p>
 							</div>
-
-							<input
-								type="text"
-								inputMode="numeric"
-								pattern="\d{16}"
-								placeholder="رقم البطاقة"
-								onInput={(e) => {
-									if (e.target.value.length > 16) {
-										e.target.value = e.target.value.slice(0, 16);
-									}
-								}}
-								className="md:col-span-2 w-full px-4 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
-								id="card-number"
-							/>
-							<input
-								type="number"
-								inputMode="numeric"
-								pattern="\d{3,4}"
-								placeholder="CVV"
-								onInput={(e) => {
-									if (e.target.value.length > 4) {
-										e.target.value = e.target.value.slice(0, 4);
-									}
-								}}
-								className="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
-								id="cvv"
-							/>
-							<div className="relative w-full">
-								<input
-									type="date"
-									id="expiry-date"
-									className="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60 transition-all duration-200"
-									placeholder=" "
-								/>
-								<label
-									htmlFor="expiry-date"
-									className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-gray-500"
-								>
-									تاريخ الصلاحية
-								</label>
-							</div>
-							<label class="flex items-center gap-2 cursor-pointer select-none">
-								<input type="checkbox" class="peer hidden" />
-								<div class="w-5 h-5 border-2 border-main-color rounded flex items-center justify-center peer-checked:bg-main-color peer-checked:border-main-color relative transition">
-									<Check className="text-white" />
-								</div>
-								<span class="text-gray-800">حفظ كبطاقة افتراضية</span>
-							</label>
 
 							<div className="lg:col-span-2">
 								<button
 									type="submit"
-									className="bg-main-color text-white w-full py-3 rounded-full mt-4 hover:bg-opacity-90 transition"
+									disabled={isLoading}
+									className="bg-main-color text-white w-full py-3 rounded-full mt-4 hover:bg-opacity-90 transition flex items-center justify-center"
 								>
-									تأكيد الدفع
+									{isLoading ? (
+										<>
+											<Loader className="animate-spin mr-2" size={20} />
+											جاري معالجة الدفع...
+										</>
+									) : (
+										"تأكيد الدفع"
+									)}
 								</button>
 							</div>
 						</div>

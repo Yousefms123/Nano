@@ -19,7 +19,7 @@ const TrendingAds = () => {
 	const nextRef = useRef(null);
 	return (
 		<div className="mt-20">
-			<h1 className="font-Tajawal text-3xl md:text-4xl  font-bold ">اعلانات رائجة</h1>
+			<h1 className="font-Tajawal text-3xl md:text-4xl  font-bold ">برامج رائجة</h1>
 			<div className="relative py-8 font-Tajawal">
 				{/* سهم يسار */}
 				<button

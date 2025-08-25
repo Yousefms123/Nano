@@ -18,7 +18,7 @@ const Brand = () => {
 					<img src={Ramadan} alt="" className="hidden transform rotate-180" />
 				</div>
 				<p className="text-white text-2xl lg:text-4xl font-Tajawal">
-					حيث نغرس نور القرأن في قلوب الأجيال
+					حيث نغرس نور القرآن في قلوب الأجيال
 				</p>
 				<div className="flex flex-col md:flex-row lg:flex-row gap-4 items-center md:justify-center mt-3 w-full p-2 font-Tajawal">
 					<Button
@@ -31,7 +31,7 @@ const Brand = () => {
 						to={"/register"}
 						className="text-base md:text-xl border rounded-full px-6 py-4 w-full"
 					>
-						انضم الينا
+						انضم إلينا
 					</Button>
 				</div>
 			</div>
