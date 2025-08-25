@@ -17,14 +17,17 @@ const Home = () => {
 			<CarouselWithContent />
 			<Statistic />
 			<DonationChance />
-			<div className="w-[90vw] mx-auto font-Tajawal ">
+			<div className="w-[90vw] mx-auto font-Tajawal mt-10">
+				<h1 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900 font-Tajawal">
+					تسجيل طالب
+				</h1>
 				<EnrollmentSection
-					title="سجل ابنك في حلقات التحفيظ"
+					title="حلقات التحفيظ"
 					descriptionParagraphs={[
-						"نُقدّم حلقات قرآنية مخصصة لجميع الأعمار، تحت إشراف نخبة من المعلمين المؤهلين، وفي بيئة تربوية راقية.",
-						"اغتنم الفرصة وسجّل ابنك في بيئة قرآنية تربوية تُنمّي شخصيته وتغرس في قلبه حب القرآن الكريم.",
+						"حلقات قرآنية مخصصة لجميع الأعمار، تحت إشراف نخبة من المعلمين المؤهلين، وفي بيئة تربوية راقية.",
+						"اغتنم الفرصة وسجّل ابنك في بيئة قرآنية تربوية تُنمّي شخصيته وتغرس في قلبه حب القرآن الكريم.",
 					]}
-					buttonText="تسجيل الطالب"
+					buttonText="تسجيل طالب"
 					imageUrl={enrollment}
 					imageAlt="صورة لأطفال يدرسون القرآن"
 				/>

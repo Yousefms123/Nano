@@ -49,12 +49,12 @@ const Footer = () => {
 	const locationLink = [
 		{
 			icon: <MapPin />,
-			text: "مركز المبنى بحي العوامر الشمالية (مقابل مسجد رحمة )",
+			text: "مبنى المركز بحيل العوامر الشمالية (مقابل مسجد الرحمة)",
 			link: "https://maps.app.goo.gl/yvgEzWaWq6eLbARW8",
 		},
 		{
 			icon: <MapPin />,
-			text: "مبنى المركز بالمعلبية الجنوبية ( حي الرحبة) - الشارع 99",
+			text: "حلقة المعبيلة الجنوبية (حي الرحبة) - شارع 99",
 			link: "https://maps.app.goo.gl/RpvYoS55tPbWjQNV8",
 		},
 	];
@@ -112,7 +112,10 @@ const Footer = () => {
 									key={index}
 									className="text-gray-600 text-sm md:text-xl text-start mt-5 flex items-center gap-x-4"
 								>
-									{item.icon}| <Link to={item.link} target="_blanck">{item.text}</Link>
+									{item.icon}|{" "}
+									<Link to={item.link} target="_blanck">
+										{item.text}
+									</Link>
 								</li>
 							))}
 						</ul>

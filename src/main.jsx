@@ -14,6 +14,8 @@ import { DataProvider } from "./data/dataContext.jsx";
 import DonationSection from "./components/DonationSection.jsx";
 import PaymentPage from "./pages/Payment.jsx";
 import Register from "./pages/Register.jsx";
+import Success from "./pages/Success.jsx";
+
 
 const router = createBrowserRouter([
 	{
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
 			{ path: "/register", element: <Register /> },
 			{ path: "/donate/item", element: <DonationSection /> },
 			{ path: "/payment", element: <PaymentPage /> },
+			{path:"/success", element:<Success />}
 		],
 	},
 ]);

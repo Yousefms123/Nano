@@ -7,6 +7,7 @@ import axios from "axios";
 const SupervisorForm = () => {
 	// const [showAlert, setShowAlert] = useState(false);
 	const [name, setName] = useState("");
+	const [gender, setGender] = useState("");
 	const [nationality, setNationality] = useState("");
 	const [courses, setCourses] = useState("");
 	const [stage, setStage] = useState("");
@@ -28,6 +29,7 @@ const SupervisorForm = () => {
 			"رقم هاتف المشرف": phoneNumber,
 			"الدورات التأهيلية للمشرف": courses,
 			"عنوان سكن المشرف": addressLine,
+			"جنس المشرف": gender,
 		};
 		axios.post(url, studentData).then((response) => {
 			console.log(response);
@@ -37,6 +39,7 @@ const SupervisorForm = () => {
 			setStage("");
 			setPhoneNumber("");
 			setAddressLine("");
+			setGender("");
 			setLoading(false);
 			setShowAlert(true);
 			setTimeout(() => {
@@ -46,7 +49,7 @@ const SupervisorForm = () => {
 	};
 
 	return (
-		<div className="">
+		<div className="font-Tajawal">
 			{showAlert && (
 				<div
 					ref={alertRef}
@@ -64,8 +67,8 @@ const SupervisorForm = () => {
 							تسجيل المشرفين في حلقات القرآن الكريم
 						</h1>
 						<p className="text-sm lg:text-lg text-gray-700">
-							نرحب بالمشرفين الراغبين في الإشراف والمتابعة داخل المركز، يُرجى تعبئة البيانات
-							التالية بعناية لنتمكن من التواصل معكم.
+							نسعد بانضمامكم الى مركز السيب القرآني , فضلاً قم بتعبئة النموذج الآتي ,
+							وسيتواصل معكم - بمشيئة الله تعالى - حسب توفر الشواغر في الحلقات.
 						</p>
 					</div>
 					<form className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-4" onSubmit={handleSubmit}>
@@ -75,7 +78,7 @@ const SupervisorForm = () => {
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
-							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 
 						<input
@@ -84,7 +87,7 @@ const SupervisorForm = () => {
 							value={nationality}
 							onChange={(e) => setNationality(e.target.value)}
 							required
-							className="w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 
 						<Select
@@ -93,8 +96,6 @@ const SupervisorForm = () => {
 							value={stage}
 							onChange={(val) => setStage(val)}
 						>
-							<Option value="رياض أطفال">رياض أطفال</Option>
-							<Option value="طالب مدرسي">طالب مدرسي</Option>
 							<Option value="دبلوم عام">دبلوم عام</Option>
 							<Option value="دبلوم عالي">دبلوم عالي</Option>
 							<Option value="بكالوريوس">بكالوريوس</Option>
@@ -108,7 +109,7 @@ const SupervisorForm = () => {
 							value={phoneNumber}
 							onChange={(e) => setPhoneNumber(e.target.value)}
 							required
-							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="text"
@@ -116,19 +117,23 @@ const SupervisorForm = () => {
 							value={addressLine}
 							onChange={(e) => setAddressLine(e.target.value)}
 							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg  w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
-						<input
+						<Select label="الجنس" dir="rtl" value={gender} onChange={(val) => setGender(val)}>
+							<Option value="ذكر">ذكر</Option>
+							<Option value="أنثى">أنثى</Option>
+						</Select>
+						<textarea
 							type="text"
-							placeholder="الدورات التأهيلية"
+							placeholder="نبذة مختصرة عن الخبرة العملية"
 							value={courses}
 							onChange={(e) => setCourses(e.target.value)}
 							required
-							className=" w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 
 						<MainButton
-							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl ${
+							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-sm md:text-base lg:text-lg ${
 								loading ? "bg-main-color/65 cursor-wait " : "bg-main-color text-white"
 							}`}
 							type="submit"

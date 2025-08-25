@@ -1,8 +1,6 @@
 import React from "react";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
-import Testimonials from "../components/Testimonials";
 import { RevesionForm } from "../components/RevesionForm";
-
 const Revision = () => {
 	return (
 		<div className="mt-20 p-4 font-Tajawal">

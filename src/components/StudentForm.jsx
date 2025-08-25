@@ -1,19 +1,22 @@
 import React, { useRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import MainButton from "./Button";
 import { Option, Select } from "@material-tailwind/react";
-import { Check, CheckCircle } from "lucide-react";
-
+import { Check, CheckCircle, ChevronRightIcon, ChevronLeftIcon, CalendarDays } from "lucide-react";
+import { format } from "date-fns";
 import axios from "axios";
 const StudentForm = () => {
-	// const [showAlert, setShowAlert] = useState(false);
+	const [date, setDate] = useState(null);
+	const [gender, setGender] = useState("");
 	const [name, setName] = useState("");
-	const [age, setAge] = useState("");
 	const [stage, setStage] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [program, setProgram] = useState("");
 	const [addressLine, setAddressLine] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [loading, setLoading] = useState(false);
+
 	const alertRef = useRef();
 	// const formRef = useRef();
 
@@ -23,17 +26,19 @@ const StudentForm = () => {
 		const url = "https://sheetdb.io/api/v1/5z96qv93ef37w?sheet=student-information";
 		const studentData = {
 			"الاسم الطالب ثلاثي": name,
-			"عمر الطالب": age,
+			"تاريخ الميلاد": date ? format(date, "dd/MM/yyyy") : "",
 			"المرحلة الدراسية للطالب": stage,
 			"رقم هاتف الطالب": phoneNumber,
 			"البرنامج المفضل للطالب": program,
 			"عنوان سكن الطالب": addressLine,
+			"جنس الطالب": gender,
 		};
 		axios.post(url, studentData).then((response) => {
 			console.log(response);
 			setName("");
-			setAge("");
+			setDate("");
 			setStage("");
+			setGender("");
 			setPhoneNumber("");
 			setProgram("");
 			setAddressLine("");
@@ -46,7 +51,7 @@ const StudentForm = () => {
 	};
 
 	return (
-		<div className="">
+		<div className="font-Tajawal">
 			{showAlert && (
 				<div
 					ref={alertRef}
@@ -57,36 +62,57 @@ const StudentForm = () => {
 				</div>
 			)}
 
-			<div className="flex flex-wrap-reverse justify-center md:flex-row ">
-				<div className="flex flex-col gap-y-7 text-start ">
+			<div className="flex flex-wrap-reverse justify-center md:flex-row">
+				<div className="flex flex-col gap-y-7 text-start w-full">
 					<div>
 						<h1 className="text-lg md:text-xl lg:text-3xl font-bold mb-4">
 							تسجيل الطلاب في حلقات القرآن الكريم
 						</h1>
 						<p className="text-sm lg:text-lg text-gray-700">
-							نسعد بانضمامكم إلى مركز السيب القرآني، فضلاً قم بتعبئة النموذج التالي لتسجيل
-							الطالب والالتحاق ببرامجنا التعليمية.
+							النموذج الآتي ؛ لتسجيل الطالب , والالتحاق ببرامجنا القرآنية
 						</p>
 					</div>
 					<form className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-4" onSubmit={handleSubmit}>
+						<div className="lg:col-span-2">
+							<Select
+								label="البرنامج"
+								dir="rtl"
+								value={program}
+								onChange={(val) => setProgram(val)}
+							>
+								<Option value="ما قبل المدرسة (برنامج البذرة المباركة)">
+									ما قبل المدرسة (برنامج البذرة المباركة)
+								</Option>
+								<Option value="إتقان التلاوة">إتقان التلاوة</Option>
+								<Option value=" الحفظ والمراجعة"> الحفظ والمراجعة</Option>
+								<Option value="الإقراء والإجازات">الإقراء والإجازات</Option>
+							</Select>
+						</div>
+
 						<input
 							type="text"
 							placeholder="اسم الطالب ثلاثي"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
-							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 
-						<input
-							type="number"
-							placeholder="العمر"
-							value={age}
-							onChange={(e) => setAge(e.target.value)}
-							required
-							className="w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
-						/>
-
+						<div className="w-[100%] relative">
+							<DatePicker
+								selected={date}
+								onChange={setDate}
+								showYearDropdown
+								showMonthDropdown
+								scrollableYearDropdown
+								yearDropdownItemNumber={100}
+								placeholderText="تاريخ الميلاد"
+								className="w-[100%] px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							/>
+							<span className="absolute inset-y-0 end-3 flex items-center pointer-events-none">
+								<CalendarDays />
+							</span>
+						</div>
 						<Select
 							label="المؤهل الدراسي"
 							dir="rtl"
@@ -108,35 +134,23 @@ const StudentForm = () => {
 							value={phoneNumber}
 							onChange={(e) => setPhoneNumber(e.target.value)}
 							required
-							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
 						<input
 							type="text"
-							placeholder="العنوان"
+							placeholder="الولاية / القرية"
 							value={addressLine}
 							onChange={(e) => setAddressLine(e.target.value)}
 							required
-							className="lg:col-span-2 w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
+							className="text-sm md:text-base lg:text-lg  w-full px-4 py-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black/60"
 						/>
-
-						<div className="lg:col-span-2">
-							<Select
-								label="البرنامج"
-								dir="rtl"
-								value={program}
-								onChange={(val) => setProgram(val)}
-							>
-								<Option value="ما قبل المدرسة (برنامج البذرة المباركة)">
-									ما قبل المدرسة (برنامج البذرة المباركة)
-								</Option>
-								<Option value="إتقان التلاوة">إتقان التلاوة</Option>
-								<Option value=" الحفظ والمراجعة"> الحفظ والمراجعة</Option>
-								<Option value="الإقراء والإجازات">الإقراء والإجازات</Option>
-							</Select>
-						</div>
+						<Select label="الجنس" dir="rtl" value={gender} onChange={(val) => setGender(val)}>
+							<Option value="ذكر">ذكر</Option>
+							<Option value="أنثى">أنثى</Option>
+						</Select>
 
 						<MainButton
-							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-lg lg:text-xl ${
+							className={`lg:col-span-2 w-full flex justify-center items-center bg-main-color rounded-full px-6 py-3 text-sm md:text-base lg:text-lg ${
 								loading ? "bg-main-color/65 cursor-wait " : "bg-main-color text-white"
 							}`}
 							type="submit"
